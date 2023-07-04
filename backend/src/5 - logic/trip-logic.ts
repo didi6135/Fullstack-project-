@@ -7,15 +7,17 @@ import { OkPacket } from "mysql";
 
 
 export const addNewTrip = async (newTrip: TripType): Promise<TripType> => {
-    validateTrip(newTrip)
-    console.log('e')
-
+    
+    
     if(newTrip.imageFile) {
         const getExtension = newTrip.imageFile.name.substring(newTrip.imageFile.name.lastIndexOf('.'))
         newTrip.imageName = uuid() + getExtension
         await newTrip.imageFile.mv("./src/1 - Assets/images/" + newTrip.imageName)
         delete newTrip.imageFile
+        validateTrip(newTrip)
     }
+    
+
 
     const query =  `
     INSERT INTO 
@@ -27,9 +29,7 @@ export const addNewTrip = async (newTrip: TripType): Promise<TripType> => {
      "${newTrip.dateStart}",
      "${newTrip.dateEnd}",
      "${newTrip.price}",
-     "${newTrip.imageName}".
-     
-     );
+     "${newTrip.imageName}", 0);
     `
     const info: OkPacket = await executeSql(query);
     newTrip.tripId = info.insertId
@@ -42,8 +42,8 @@ export const getAllTrips = async (): Promise<TripType[]> => {
     const query = `
     SELECT * FROM trip
     `
-
     const trips = await executeSql(query) as TripType[]
-
     return trips
 }
+
+

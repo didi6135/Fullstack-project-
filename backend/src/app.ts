@@ -1,4 +1,3 @@
-import { setServers } from "dns";
 import express  from "express";
 import expressFileUpload from 'express-fileupload';
 import { appConfig } from "./2 - utils/appConfig";
@@ -12,8 +11,9 @@ import cors from 'cors'
 
 const server = express()
 
-server.use(express.json())
 server.use(expressFileUpload());
+server.use(express.static('public')); 
+server.use(express.json())
 server.use(cors())
 
 server.use("/api", tripControllers)

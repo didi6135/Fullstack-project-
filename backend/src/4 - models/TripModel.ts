@@ -18,7 +18,7 @@ export type TripType = {
 }
 
 export const TripValidationSchema = Joi.object({
-    tripId: Joi.number().optional().positive().integer(),
+    tripId: Joi.number().optional(),
     destination: Joi.string().required().min(1).max(20),
     tripDescription: Joi.string().required().min(20).max(200),
     dateStart: Joi.date().iso().min(moment().format('YYYY-MM-DD')).required() ,

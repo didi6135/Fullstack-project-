@@ -19,3 +19,13 @@ export const tripValidateError = (msg: string) => {
     const errorObj: ErrorType = {message: msg, status: 401}
     throw errorObj
 }
+
+export const isEmailExist = (msg: string) => {
+    const errorObj: ErrorType = {message: msg, status: 401}
+    throw errorObj
+}
+
+export const UnauthorizedError = (msg: string) => {
+    const errorObj: ErrorType = {message: msg, status: 401}
+    throw errorObj
+}

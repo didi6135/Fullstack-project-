@@ -20,7 +20,8 @@ export type UserType = {
 
 
 
-export const passwordValidation = Joi.string()
+export const passwordValidation = Joi
+  .string()
   .min(8)
   .max(30)
   .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).*$/)
@@ -60,7 +61,7 @@ export const loginCredentialsSchema = Joi.object({
 })
 
 
-export const userValidateSchema = Joi.object({
+export const registerUserValidateSchema = Joi.object({
     id: Joi.string().optional() ,
     firstName: firstNameValidation,
     lastName: lastNameValidation,
@@ -71,8 +72,15 @@ export const userValidateSchema = Joi.object({
 })
 
 
-export const validateUser = (user: UserType) => {
-  const result = userValidateSchema.validate(user)
+export const validateUserRegister = (user: UserType) => {
+  const result = registerUserValidateSchema.validate(user)
+  if(result.error) {
+      validationError(result.error.message)
+  }
+}
+
+export const validateUserLogin = (credentials: LoginCredentialsType) => {
+  const result = loginCredentialsSchema.validate(credentials)
   if(result.error) {
       validationError(result.error.message)
   }

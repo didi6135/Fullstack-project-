@@ -1,14 +1,25 @@
 import jwt from 'jsonwebtoken';
 import { request, Request } from 'express';
-import { UserType } from '../4 - models/UserModel';
+import { LoginCredentialsType, UserType } from '../4 - models/UserModel';
 
 
 
 const secretKey = 'trip-for-you'
 
-export const getNewToken = (user: UserType): string => {
+export const getNewTokenForRegister = (user: UserType): string => {
 
     const container = { user }
+    
+    const option = { expiresIn: '3h' }
+
+    const token = jwt.sign(container, secretKey, option)
+
+    return token
+}
+
+export const getNewTokenForLogin = (credentials: LoginCredentialsType): string => {
+
+    const container = { credentials }
     
     const option = { expiresIn: '3h' }
 
@@ -21,10 +32,9 @@ export const verifyToken = (Request: Request): Promise<boolean> => {
 
     return new Promise<boolean>((res, rej) => {
 
-        try {
+        try { 
             // extract header
-            const header = request.header("authorization")
-
+            const header = Request.headers.authorization
             // check if there is header
             if(!header) {
                 res(false)
