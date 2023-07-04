@@ -1,0 +1,12 @@
+
+
+.tripCard {
+    border: 1px solid black;
+    flex-wrap: wrap;
+    width: 300px;
+    text-align: center;
+}
+
+.description {
+    line-break: anywhere;
+}
