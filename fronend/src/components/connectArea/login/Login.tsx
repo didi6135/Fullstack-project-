@@ -28,7 +28,9 @@ export const Login = () => {
 
       await loginUser(loginInfo)
       .then(res => {
-        localStorage.setItem('Token', JSON.stringify(res))
+        localStorage.setItem('Token', JSON.stringify(res[0]))
+        localStorage.setItem('role', JSON.stringify(res[1]))
+        localStorage.setItem('id', JSON.stringify(res[2]))
         navigate('/vacationPage')
       })
       .catch(err => {

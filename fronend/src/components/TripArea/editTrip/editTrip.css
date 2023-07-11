@@ -1,0 +1,18 @@
+
+
+.imageDiv {
+    display: flex;
+    position: relative;
+    width: 300px;
+}
+
+.image {
+   
+    width: 300px;
+}
+/* .inputImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: 'translate(-50%, -50%)',
+} */

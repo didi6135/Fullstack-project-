@@ -1,7 +1,7 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { addNewTrip } from "../../Services/tripService";
-import { TripType } from "../../types/TripType";
+import { addNewTrip } from "../../../Services/tripService";
+import { TripType } from "../../../types/TripType";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -21,8 +21,10 @@ export const AddNewTrip = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [errorMsg, setError] = useState('')
+
     const [tripValue, setTripValue] = useState<TripType>({
-        tripId: 0,
+        TripId: 0,
         destination: '',
         tripDescription: '',
         dateStart: '',
@@ -38,10 +40,11 @@ export const AddNewTrip = () => {
   }
 
   const handleSubmit = async () => {
+
     try {
       await addNewTrip(tripValue)
       .then(res => console.log(res))
-      .catch(err => console.log(err.response.data))
+      .catch(err => setError(prev => prev = err.response.data))
       
     } catch (error) {
       console.log(error)
@@ -67,25 +70,51 @@ export const AddNewTrip = () => {
 
         <Box sx={style}>
             <form action="" encType="multipart/form-data">
+
             <Typography>Destination:</Typography>
+            <Typography 
+            sx={{color: 'red', fontSize: '13px'}}>
+              {errorMsg.split(' ')[0] === '"destination"' ? errorMsg : ''}
+            </Typography>
             <TextField onChange={handleInput} name='destination' sx={{width: '250px'}} type={'text'}></TextField>
             
-            
-            <Typography>Description:</Typography>
+            <Typography>Description:</Typography>           
+            <Typography 
+            sx={{color: 'red', fontSize: '13px'}}>
+              {errorMsg.split(' ')[0] === '"tripDescription"' ? errorMsg : ''}
+            </Typography>
             <textarea onChange={handleInput} name='tripDescription' placeholder="Add Description" rows={5} cols={31}/>
 
             <Typography>Start on:</Typography>
+            <Typography 
+            sx={{color: 'red', fontSize: '13px'}}>
+              {errorMsg.split(' ')[0] === '"dateStart"' ? errorMsg : ''}
+            </Typography>
             <input onChange={handleInput} name='dateStart' type="date"
             min={new Date().toISOString().split('T')[0]}
             />
 
             <Typography>End on:</Typography>
+
+            <Typography 
+            sx={{color: 'red', fontSize: '13px'}}>
+              {errorMsg.split(' ')[0] === '"dateEnd"' ? errorMsg : ''}
+            </Typography>
             <input onChange={handleInput} name='dateEnd' type="date" />
 
             <Typography>Price:</Typography>
+
+            <Typography 
+            sx={{color: 'red', fontSize: '13px'}}>
+              {errorMsg.split(' ')[0] === '"price"' ? errorMsg : ''}
+            </Typography>
             <input onChange={handleInput} name='price' type="number" />
 
             <Typography>Cover image:</Typography>
+            <Typography 
+            sx={{color: 'red', fontSize: '13px'}}>
+              {errorMsg.split(' ')[0] === '"imageName"' ? errorMsg : ''}
+            </Typography>
             <input onChange={handleFileChange} name='imageFile' type="file" /> <br/><br/>
 
             <Button onClick={handleSubmit}>Add new trip</Button>

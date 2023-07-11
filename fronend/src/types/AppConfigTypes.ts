@@ -6,4 +6,7 @@ export type AppConfigType = {
     getAllVacationUrl: string;
     getOneVacationUrl: string;
     addNewVacationUrl: string;
+    updateVacationUrl: string;
+    getAllFollowersForAllTrip: string;
+    addLikeToTripUrl: string
 }

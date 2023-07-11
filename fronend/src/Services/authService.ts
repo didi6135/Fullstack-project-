@@ -14,12 +14,18 @@ export const registerUser = async (user: RegisterType): Promise<string> => {
     return token
 }
 
-export const loginUser = async (credential: LoginCredentialsType) :Promise<string> => {
+export const loginUser = async (credential: LoginCredentialsType) :Promise<string[]> => {
     const response = await axios.post(appConfig.loginUrl, credential)
 
     const token = response.data
-
     return token
+}
+
+export const verifyAdminService = async (credential: LoginCredentialsType) :Promise<string[]> => {
+    
+    const response = await axios.post(appConfig.loginUrl, credential)
+    const token = response.data
+    return token[1]
 }
 
 // export const checkToken = async (token:string): Promise<string> => {

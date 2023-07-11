@@ -5,8 +5,17 @@
     flex-wrap: wrap;
     width: 300px;
     text-align: center;
+    margin: 10px;
 }
 
 .description {
     line-break: anywhere;
+}
+
+.like {
+    color: red;
+}
+
+.dislike {
+    
 }

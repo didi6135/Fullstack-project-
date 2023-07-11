@@ -1,0 +1,4 @@
+.vacationConteiner {
+    display: flex;
+    flex-wrap: wrap;
+}

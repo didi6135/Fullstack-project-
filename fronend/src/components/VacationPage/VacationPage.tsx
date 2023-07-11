@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { getAllFollowersService } from "../../Services/followersService"
 import { getAllVacations } from "../../Services/tripService"
+import { FollowersType } from "../../types/followerType"
 import { TripType } from "../../types/TripType"
-import { VacationCard } from "./VacationCard"
+import { VacationCard } from "./vacationCard/VacationCard"
+
+import './vacationPage.css'
 
 
 export const VacationPage = () => {
@@ -10,11 +14,12 @@ export const VacationPage = () => {
   const navigate = useNavigate()
 
     const [trips, setTrips] = useState<TripType[]>([])
+    const [allLikes, setAllLikes] = useState<FollowersType[]>([])
+
+    const token = localStorage.getItem('Token')
+    const tokenFixed = token?.replace(/["]/g, '')
 
     useEffect(() => {
-
-      const token = localStorage.getItem('Token')
-      const tokenFixed = token?.replace(/["]/g, '')
 
          getAllVacations(tokenFixed)
         .then(res => setTrips(res))
@@ -27,8 +32,10 @@ export const VacationPage = () => {
 
   return <>
     <h1>Vacation Page</h1>
-    {trips.map((trip, id) => (
-    <VacationCard key={id} trip={trip} />))}
+    <section className="vacationConteiner">
+      {trips.map((trip, id) => (
+      <VacationCard key={id} trip={trip} />))}
+    </section>
   </>
 }
 
