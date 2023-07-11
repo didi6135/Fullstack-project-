@@ -1,4 +1,5 @@
 import { executeSql } from '../2 - utils/dal'
+import { followersType } from '../4 - models/followersModel';
 
 
 
@@ -13,10 +14,10 @@ export const getAllFollowersLogic = async(id: number): Promise<number> => {
 
 }
 
-export const addLikeToTripLogic = async(tripId: number, userId: number): Promise<number> => {
+export const addLikeToTripLogic = async(newFollower: followersType): Promise<number> => {
 
     const query = `
-    INSERT INTO  followers(userId, tripId) VALUES (${userId} , ${tripId});
+    INSERT INTO  followers(userId, tripId) VALUES (${newFollower.userId} , ${newFollower.TripId});
     `
     const allFollowers = await executeSql(query)
     const followerCount = allFollowers[0]['COUNT(userId)'];

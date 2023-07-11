@@ -3871,3 +3871,77 @@
  ---------------------------------------------
  11.7.2023, 15:11:08 - ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'field list'  
  ---------------------------------------------
+ 11.7.2023, 15:23:09 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:23:12 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:23:21 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:23:36 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:23:39 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:23:48 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:25:29 - Invalid token  
+ ---------------------------------------------
+ 11.7.2023, 15:26:37 - ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'field list'  
+ ---------------------------------------------
+ 11.7.2023, 15:27:05 - ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'field list'  
+ ---------------------------------------------
+ 11.7.2023, 15:27:27 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:28:03 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:28:35 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:29:11 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:38:02 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:38:26 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:38:30 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:38:35 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:38:42 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:38:49 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:38:51 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:38:54 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:41:18 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:41:20 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:41:21 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 15:41:22 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:23 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:24 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:25 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:26 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:27 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:27 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:28 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:29 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:30 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:31 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:31 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 15:41:58 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
