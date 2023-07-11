@@ -46,7 +46,7 @@ export const verifyToken = (Request: Request): Promise<boolean> => {
             // authorization header --> "Bearer the-token"
             //                           01234567
             const token = header.substring(7)
-
+            // console.log(token)
             if(!token) {
                 res(false)
                 return

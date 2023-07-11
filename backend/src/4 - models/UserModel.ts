@@ -68,7 +68,6 @@ export const registerUserValidateSchema = Joi.object({
     email: mailValidation,
     password: passwordValidation,
     role: Joi.string() ,
-    follow: Joi.string().optional(),
 })
 
 

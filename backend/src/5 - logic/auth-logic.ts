@@ -1,5 +1,7 @@
+import { OkPacket } from "mysql";
 import { executeSql } from "../2 - utils/dal";
 import { getNewTokenForLogin, getNewTokenForRegister } from "../2 - utils/verifyAndCreateToken";
+import { verifyAdmin } from "../2 - utils/verifyRole";
 import { isEmailExist } from "../4 - models/ErrorModel";
 import { LoginCredentialsType, UserType, validateUserLogin, validateUserRegister } from "../4 - models/UserModel";
 
@@ -15,8 +17,19 @@ export const checkIsEmailExist = async (email: string): Promise<object> => {
     return info
 }
 
+export const getIdByEmail = async(email:string): Promise<number> => {
+    const query = `
+    SELECT id FROM users WHERE email = "${email}"
+    `
+    const id = await executeSql(query)
 
-export const registerUserLogic = async (user: UserType): Promise<string> => {
+    return id[0]["id"]
+}
+
+
+
+
+export const registerUserLogic = async (user: UserType): Promise<Array<string | number>> => {
    const check = await checkIsEmailExist(user.email)
    console.log(check[0].count);
    
@@ -36,22 +49,22 @@ export const registerUserLogic = async (user: UserType): Promise<string> => {
         ('${user.firstName}', '${user.lastName}', '${user.email}', '${user.password}', '${user.role}');
         `
     
-        await executeSql(query)
-        return token 
+        const info: OkPacket = await executeSql(query)
+        const id =  info.insertId
+        return [token, 'user', id] 
 } 
 
 
-export const LoginUserLogic = async (credentials: LoginCredentialsType): Promise<string> => {
+export const LoginUserLogic = async (credentials: LoginCredentialsType): Promise<Array<string | number>> => {
 
     const check = await checkIsEmailExist(credentials.email)
-    
+
+    const id = await getIdByEmail(credentials.email)
     
     if(check[0].count = 0) {
         return isEmailExist('Incorrect email or password')
      } 
     validateUserLogin(credentials)
-
-
 
     const token = getNewTokenForLogin(credentials)
 
@@ -63,9 +76,16 @@ export const LoginUserLogic = async (credentials: LoginCredentialsType): Promise
     const sql = await executeSql(query)
 
     if(sql[0]) {
-        return token ;
+        const checkRole = await verifyAdmin(credentials.email)
+        if(checkRole) {
+            return [token, 'admin', id]
+        } else {
+            return [token, 'user', id]
+    
+        }
     } else {
         return isEmailExist('Incorrect email or password') 
     } 
+
 
 }

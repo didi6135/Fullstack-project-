@@ -6,7 +6,6 @@ import { UnauthorizedError } from '../4 - models/ErrorModel';
 export const verifyLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
-        // console.log(req.headers)
         const isValid = await verifyToken(req);
         if(!isValid) UnauthorizedError('Invalid token');
         next();
