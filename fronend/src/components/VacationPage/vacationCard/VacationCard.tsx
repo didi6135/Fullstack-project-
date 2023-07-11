@@ -1,3 +1,4 @@
+import { Preview } from "@mui/icons-material"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -18,12 +19,17 @@ export const VacationCard = ({trip}: TripProps) => {
 
     const [imageUrl, setImageUrl] = useState('')
     const [role, setRole] = useState('')
-    const [addNewLike, setAddNewLike] = useState<FollowersType>()
+
+    const [addNewLike, setAddNewLike] = useState<FollowersType>({
+        userId: 0,
+        TripId: 0
+    })
 
     const [allLikes, setAllLikes] = useState(0)
 
     const token = localStorage.getItem('Token')
-    const id = localStorage.getItem('id')
+    const userID = localStorage.getItem('id')
+    const tripID = trip.TripId
     const tokenFixed = token?.replace(/["]/g, '')
 
     const [myLike, setMyLike] = useState(false)
@@ -72,10 +78,12 @@ export const VacationCard = ({trip}: TripProps) => {
         setMyLike(prev => !prev)
         setAllLikes(prevLikes => prevLikes + (myLike ? -1 : 1));
         try {
-            if(token && id && myLike) {
-                setAddNewLike(+id, trip.TripId)
+            if(tokenFixed && userID) {
+                setAddNewLike(prev => ({...prev, userId: +userID, TripId: tripID}))
+
                 if(addNewLike) {
-                    await addLikeToTrip(token, trip.TripId, addNewLike)
+                    console.log(addNewLike)
+                    await addLikeToTrip(tokenFixed, tripID, addNewLike)
                 }
             }
         } catch (error) {

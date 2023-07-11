@@ -16,7 +16,7 @@ export const getAllFollowersService = async (token: string, id: number): Promise
 }
 
 export const addLikeToTrip = async (token: string, triId: number, addFoolower: FollowersType): Promise<number> => {
-
+    console.log(addFoolower)
     const response = await axios.put(appConfig.addLikeToTripUrl + `/${triId}`, addFoolower, {
         headers: {
           Authorization: `Bearer ${token}`,
