@@ -3,7 +3,7 @@
 
 
 
-export type followersType = {
+export type FollowersType = {
     userId: number
     TripId: number
 }

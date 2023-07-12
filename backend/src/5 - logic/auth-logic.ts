@@ -3,7 +3,7 @@ import { executeSql } from "../2 - utils/dal";
 import { getNewTokenForLogin, getNewTokenForRegister } from "../2 - utils/verifyAndCreateToken";
 import { verifyAdmin } from "../2 - utils/verifyRole";
 import { isEmailExist } from "../4 - models/ErrorModel";
-import { LoginCredentialsType, UserType, validateUserLogin, validateUserRegister } from "../4 - models/UserModel";
+import { LoginCredentialsType, NewPasswordType, UserType, validateNewPassword, validateUserLogin, validateUserRegister } from "../4 - models/UserModel";
 
 
 
@@ -31,7 +31,6 @@ export const getIdByEmail = async(email:string): Promise<number> => {
 
 export const registerUserLogic = async (user: UserType): Promise<Array<string | number>> => {
    const check = await checkIsEmailExist(user.email)
-   console.log(check[0].count);
    
     if(check[0].count >= 1) {
        return isEmailExist('This email already exist')
@@ -88,4 +87,36 @@ export const LoginUserLogic = async (credentials: LoginCredentialsType): Promise
     } 
 
 
+}
+
+
+export const getUserDetails = async(userId: number): Promise<UserType> => {
+
+    const query = `
+    SELECT * FROM users WHERE id = ${userId}
+    `
+
+    const userData = await executeSql(query) as UserType
+    return userData[0]
+
+}
+
+export const changePassword = async(userId: number, newPass: NewPasswordType): Promise<string> => {
+
+    const getData = await getUserDetails(userId)
+
+    const getCurrentPass = getData.password
+
+    validateNewPassword(newPass)
+
+
+    const query = `
+    UPDATE users SET 
+    password = "${newPass}"
+    WHERE id = ${userId}
+    `
+
+    const result = await executeSql(query)
+    console.log(result)
+    return result
 }

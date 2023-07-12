@@ -3945,3 +3945,261 @@
  ---------------------------------------------
  11.7.2023, 15:41:58 - Cannot read properties of undefined (reading 'COUNT(userId)')  
  ---------------------------------------------
+ 11.7.2023, 21:38:51 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:38:57 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 21:48:19 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:48:53 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:52:00 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:52:04 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 21:52:50 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:52:57 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:54:21 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:54:23 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:55:53 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:55:55 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:00 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:56:01 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:23 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:24 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:25 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:26 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:29 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:29 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 21:56:43 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:56:44 - Cannot read properties of undefined (reading 'COUNT(userId)')  
+ ---------------------------------------------
+ 11.7.2023, 21:57:45 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 21:57:47 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:00:15 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:00:20 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:03:03 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:03:11 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:03:12 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:03:26 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:03:28 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:09:42 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:09:44 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:10:06 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:10:07 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:10:08 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:11:45 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:12:00 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:12:02 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:12:35 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:12:40 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:15:14 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:15:25 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:15:26 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:16:28 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:16:39 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:18:44 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:19:13 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:19:14 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:15 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:17 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:18 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:21 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:19:22 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:22 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:22 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:23 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:23 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:24 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:24 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:26 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:19:26 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:19:50 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:19:52 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:22:29 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:22:33 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:23:52 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:23:54 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:23:55 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:23:56 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:23:59 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:23:59 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:24:03 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:24:04 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:24:05 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:24:05 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:24:05 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:24:05 - You already follow this trip  
+ ---------------------------------------------
+ 11.7.2023, 22:27:07 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 11.7.2023, 22:27:32 - Invalid token  
+ ---------------------------------------------
+ 11.7.2023, 22:27:47 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 12.7.2023, 1:27:45 - Invalid token  
+ ---------------------------------------------
+ 12.7.2023, 11:49:11 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 12.7.2023, 11:49:14 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:07 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 12.7.2023, 11:53:08 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:09 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:09 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:10 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:20 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 12.7.2023, 11:53:21 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:21 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:21 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:21 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:22 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:22 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:25 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 12.7.2023, 11:53:25 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:25 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:26 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 11:53:26 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 12:36:39 - Invalid token  
+ ---------------------------------------------
+ 12.7.2023, 12:36:39 - Invalid token  
+ ---------------------------------------------
+ 12.7.2023, 12:36:39 - Invalid token  
+ ---------------------------------------------
+ 12.7.2023, 12:59:18 - Cannot read properties of undefined (reading 'affectedRows')  
+ ---------------------------------------------
+ 12.7.2023, 13:00:43 - removing.json is not a function  
+ ---------------------------------------------
+ 12.7.2023, 13:02:06 - Cannot read properties of undefined (reading 'affectedRows')  
+ ---------------------------------------------
+ 12.7.2023, 13:20:25 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 12.7.2023, 13:23:34 - Invalid token  
+ ---------------------------------------------
+ 12.7.2023, 13:23:51 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`))  
+ ---------------------------------------------
+ 12.7.2023, 13:27:07 - ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`trip-for-you`.`followers`, CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`))  
+ ---------------------------------------------
+ 12.7.2023, 13:29:22 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 13:29:33 - You already follow this trip  
+ ---------------------------------------------
+ 12.7.2023, 14:00:20 - ER_BAD_FIELD_ERROR: Unknown column 'id' in 'field list'  
+ ---------------------------------------------
+ 12.7.2023, 14:01:06 - Cannot read properties of undefined (reading 'id')  
+ ---------------------------------------------
+ 12.7.2023, 14:01:22 - Cannot read properties of undefined (reading 'id')  
+ ---------------------------------------------
+ 12.7.2023, 15:15:19 - Router /api/auth/userDetails/36 not found  
+ ---------------------------------------------
+ 12.7.2023, 16:05:41 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:07:47 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:07:58 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:08:24 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:09:06 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:09:21 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:09:21 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:09:31 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:09:31 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:09:32 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:09:32 - "newPassword" is required  
+ ---------------------------------------------
+ 12.7.2023, 16:16:22 - "newPassword" is required  
+ ---------------------------------------------

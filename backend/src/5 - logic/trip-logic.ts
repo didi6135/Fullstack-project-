@@ -46,6 +46,7 @@ export const getAllTrips = async (): Promise<TripType[]> => {
     return trips
 }
 
+
 export const updateTripLogic = async (updateTrip: TripType): Promise<TripType> => {
     
     if(updateTrip.imageFile) {

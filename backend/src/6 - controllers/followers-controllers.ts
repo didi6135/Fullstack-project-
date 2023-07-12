@@ -1,32 +1,61 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { getAllTrips } from '../5 - logic/trip-logic';
 import { verifyLoggedIn } from '../3 - middleware/checkIsLogin';
-import { getAllFollowersLogic, addLikeToTripLogic } from '../5 - logic/followers-logics';
-import { followersType } from '../4 - models/followersModel';
+import { getAllFollowersLogic, addLikeToTripLogic, getTripThatUserFollow, removeFollowFromTrip } from '../5 - logic/followers-logics';
+import { FollowersType } from '../4 - models/followersModel';
 
 const router = express.Router();
 
 
-// Add new trip
-router.put('/followers/tripId/:id([0-9]+)',verifyLoggedIn,  async (req: Request, res: Response, nextFunc: NextFunction) => {
+// Add new follow
+router.post('/followers/tripId/:userId([0-9]+)/:tripId([0-9]+)',  async (req: Request, res: Response, nextFunc: NextFunction) => {
     try { 
-        const newFollower = req.body as followersType
-        console.log(newFollower)
-        const userId = +req.params.id
-        const followers = await addLikeToTripLogic(newFollower)
+        // const newFollower = req.body as FollowersType
+        const userId = +req.params.userId
+        const tripId = +req.params.tripId
+        // console.log(newFollower)
+        // const userId = +req.params.id
+        const followers = await addLikeToTripLogic(userId, tripId)
         res.json(followers)
     } catch (error) {
         nextFunc(error) 
     }
 })
 
-// Get one followers
+// Get all follower
 router.get('/followers/:id([0-9]+)',verifyLoggedIn,  async (req: Request, res: Response, nextFunc: NextFunction) => {
 
     try {
         const id = +req.params.id
         const followers = await getAllFollowersLogic(id)
         res.json(followers)
+    } catch (error) {
+        nextFunc(error)
+    }
+})
+
+
+// Get trip that user Follow
+router.get('/checkIfUserFollow/:userId([0-9]+)/:tripId([0-9]+)',  async (req: Request, res: Response, nextFunc: NextFunction) => {
+
+    try {
+        const userId = +req.params.userId
+        const tripId = +req.params.tripId
+        const userFollow = await getTripThatUserFollow(userId, tripId)
+        res.json(userFollow)
+    } catch (error) {
+        nextFunc(error)
+    }
+})
+
+// Remove the follow from trip
+router.delete('/deleteFollow/:userId([0-9]+)/:tripId([0-9]+)',  async (req: Request, res: Response, nextFunc: NextFunction) => {
+
+    try {
+        const userId = +req.params.userId
+        const tripId = +req.params.tripId
+        const userFollow = await removeFollowFromTrip(userId, tripId)
+        res.json(userFollow)
     } catch (error) {
         nextFunc(error)
     }

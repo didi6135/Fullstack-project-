@@ -18,6 +18,10 @@ export type UserType = {
     role: string,
 }
 
+export type NewPasswordType = {
+  newPassword: string
+}
+
 
 
 export const passwordValidation = Joi
@@ -70,6 +74,10 @@ export const registerUserValidateSchema = Joi.object({
     role: Joi.string() ,
 })
 
+export const newPasswordSchema = Joi.object({
+  newPassword: passwordValidation
+})
+
 
 export const validateUserRegister = (user: UserType) => {
   const result = registerUserValidateSchema.validate(user)
@@ -82,6 +90,13 @@ export const validateUserLogin = (credentials: LoginCredentialsType) => {
   const result = loginCredentialsSchema.validate(credentials)
   if(result.error) {
       validationError(result.error.message)
+  }
+}
+
+export const validateNewPassword = (newPass: NewPasswordType) => {
+  const result = newPasswordSchema.validate(newPass)
+  if(result.error) {
+    validationError(result.error.message)
   }
 }
 
