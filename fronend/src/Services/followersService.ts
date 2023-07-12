@@ -15,13 +15,27 @@ export const getAllFollowersService = async (token: string, id: number): Promise
     return followers
 }
 
-export const addLikeToTrip = async (token: string, triId: number, addFoolower: FollowersType): Promise<number> => {
-    console.log(addFoolower)
-    const response = await axios.put(appConfig.addLikeToTripUrl + `/${triId}`, addFoolower, {
+export const addLikeToTrip = async (token: string, userId:number, tripId: number): Promise<number> => {
+    const response = await axios.post(appConfig.addLikeToTripUrl + `/${userId}/${tripId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
     const followers = response.data
     return followers
+}
+
+export const checkingFollow = async(userId: number, tripId:number): Promise<boolean> => {
+  const response = await axios.get(appConfig.checkIfUserFollowUrl + `/${userId}/${tripId}`)
+
+  const tripFollow = response.data
+  return tripFollow
+}
+
+export const removingFollowFromTrip = async(userId: number, tripId:number) : Promise<number> => {
+
+  const response = await axios.delete(appConfig.removingFollowUrl + `/${userId}/${tripId}`)
+  const removeFollow = response.data
+  return removeFollow
+
 }

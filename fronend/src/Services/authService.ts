@@ -28,6 +28,16 @@ export const verifyAdminService = async (credential: LoginCredentialsType) :Prom
     return token[1]
 }
 
-// export const checkToken = async (token:string): Promise<string> => {
+export const getUserDetails = async (userId:number): Promise<RegisterType> => {
+    const response =await axios.get(appConfig.getUserDetailsUrl + `/${userId}`)
 
-// }
+    const details = response.data as RegisterType
+    return details
+}
+
+export const changePassword = async(userId: number, newPass: string): Promise<string> => {
+    const response = await axios.put(appConfig.changePasswordUrl + `/${userId}`, newPass)
+    console.log(response.config)
+    const result = response.data
+    return result
+} 

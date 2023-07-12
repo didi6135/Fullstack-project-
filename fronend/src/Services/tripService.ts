@@ -25,8 +25,8 @@ export const getOneTrip = async (id: number): Promise<EditTripType> => {
 
 
 export const addNewTrip = async (trip: TripType): Promise<TripType> => {
-    // trip.imageName = trip.imageFile?.name
-    const response = await axios.post(appConfig.addNewVacationUrl, trip, {
+
+  const response = await axios.post(appConfig.addNewVacationUrl, trip, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -38,7 +38,7 @@ export const addNewTrip = async (trip: TripType): Promise<TripType> => {
 
 
 export const updateTrip = async(updateTrip: TripType): Promise<void> => {
-  console.log(updateTrip)
+
   await axios.put(appConfig.updateVacationUrl + `/${updateTrip.TripId}`, updateTrip, {
     headers: {
       'Content-Type': 'multipart/form-data',
