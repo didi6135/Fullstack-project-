@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { validationError } from './ErrorModel'
+import { isEmailExist, validationError } from './ErrorModel'
 
 
 export type RuleType = "admin" | "user"
@@ -21,6 +21,18 @@ export type UserType = {
 export type NewPasswordType = {
   newPassword: string
 }
+
+export type UpdateUserDetailsType = {
+  firstName: string,
+  lastName: string,
+  email: string
+}
+
+export type UserTripType = {
+  userId: number;
+  tripId: number;
+};
+
 
 
 
@@ -78,6 +90,11 @@ export const newPasswordSchema = Joi.object({
   newPassword: passwordValidation
 })
 
+export const updateUserDetailsSchema = Joi.object({
+  firstName: firstNameValidation,
+  lastName: lastNameValidation,
+  email: mailValidation
+})
 
 export const validateUserRegister = (user: UserType) => {
   const result = registerUserValidateSchema.validate(user)
@@ -95,6 +112,13 @@ export const validateUserLogin = (credentials: LoginCredentialsType) => {
 
 export const validateNewPassword = (newPass: NewPasswordType) => {
   const result = newPasswordSchema.validate(newPass)
+  if(result.error) {
+    validationError(result.error.message)
+  }
+}
+
+export const validateUpdateUser = (userDetails: UpdateUserDetailsType) => {
+  const result = updateUserDetailsSchema.validate(userDetails)
   if(result.error) {
     validationError(result.error.message)
   }

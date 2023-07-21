@@ -3,7 +3,7 @@ import { executeSql } from "../2 - utils/dal";
 import { getNewTokenForLogin, getNewTokenForRegister } from "../2 - utils/verifyAndCreateToken";
 import { verifyAdmin } from "../2 - utils/verifyRole";
 import { isEmailExist } from "../4 - models/ErrorModel";
-import { LoginCredentialsType, NewPasswordType, UserType, validateNewPassword, validateUserLogin, validateUserRegister } from "../4 - models/UserModel";
+import { LoginCredentialsType, NewPasswordType, UpdateUserDetailsType, UserType, validateNewPassword, validateUpdateUser, validateUserLogin, validateUserRegister } from "../4 - models/UserModel";
 
 
 
@@ -103,20 +103,40 @@ export const getUserDetails = async(userId: number): Promise<UserType> => {
 
 export const changePassword = async(userId: number, newPass: NewPasswordType): Promise<string> => {
 
-    const getData = await getUserDetails(userId)
-
-    const getCurrentPass = getData.password
-
     validateNewPassword(newPass)
 
 
     const query = `
     UPDATE users SET 
-    password = "${newPass}"
+    password = "${newPass.newPassword}"
     WHERE id = ${userId}
     `
 
-    const result = await executeSql(query)
-    console.log(result)
-    return result
+    const info: OkPacket = await executeSql(query)
+    if(info.affectedRows === 1) {
+        return 'Your Password changed successfully' 
+    } else if (info.affectedRows === 0) {
+        return 'Your password has not been changed'
+    }
+
+}
+
+export const updateUserDetails = async (userId: number, userDetails: UpdateUserDetailsType): Promise<string> => {
+
+    validateUpdateUser(userDetails)
+
+    const query = `
+    UPDATE users SET
+    firstName = "${userDetails.firstName}",
+    lastName = "${userDetails.lastName}",
+    email = "${userDetails.email}"
+    WHERE id = ${userId}
+    `
+
+    const info: OkPacket = await executeSql(query)
+    if(info.affectedRows === 1) {
+        return 'Your Details changed successfully' 
+    } else if (info.affectedRows === 0) {
+        return 'Your Details has not been changed'
+    }
 }

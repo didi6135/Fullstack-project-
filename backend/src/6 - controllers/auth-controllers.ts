@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 import { verifyAdmin } from '../2 - utils/verifyRole';
 import { LoginCredentialsType, NewPasswordType, UserType } from '../4 - models/UserModel';
-import { changePassword, getUserDetails, LoginUserLogic, registerUserLogic } from '../5 - logic/auth-logic';
+import { changePassword, getUserDetails, LoginUserLogic, registerUserLogic, updateUserDetails } from '../5 - logic/auth-logic';
 
 
 
@@ -23,9 +23,7 @@ router.post('/auth/login', async (req: Request, res: Response, next: NextFunctio
 
         const credentials = req.body as LoginCredentialsType;
         const token = await LoginUserLogic(credentials);
-        // console.log(token)
-        // const test = await verifyAdmin(req)
-        // res.json(test)
+
         res.status(200).json(token);
     } catch (err: any) {
         next(err)
@@ -45,13 +43,27 @@ router.get('/auth/userDetails/:id([0-9]+)', async (req: Request, res: Response, 
     }
 })
 
+// Update password
 router.put('/auth/changePassword/:id([0-9]+)', async (req: Request, res: Response, next: NextFunction) => {
     try {
 
         const userId = +req.params.id
         const newPass = req.body
-        console.log(newPass)
         const userData = await changePassword(userId, newPass)
+        res.status(200).json(userData);
+    } catch (err: any) {
+        next(err)
+    }
+})
+
+
+// Update user details
+router.put('/auth/updateDetails/:id([0-9]+)', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+
+        const userId = +req.params.id 
+        const details = req.body
+        const userData = await updateUserDetails(userId, details)
         res.status(200).json(userData);
     } catch (err: any) {
         next(err)

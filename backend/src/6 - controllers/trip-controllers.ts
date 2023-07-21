@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { TripType } from '../4 - models/TripModel';
-import { addNewTrip, getAllTrips, getOneTrip, updateTripLogic } from '../5 - logic/trip-logic';
+import { addNewTrip, getAllTripIDS, getAllTrips, getOneTrip, updateTripLogic } from '../5 - logic/trip-logic';
 import multer from 'multer'
 import { verifyLoggedIn } from '../3 - middleware/checkIsLogin';
 import path from 'path';
@@ -29,6 +29,17 @@ router.get('/trips', verifyLoggedIn, async (req: Request, res: Response, nextFun
 
     try {
         const trips = await getAllTrips()
+        res.json(trips)
+    } catch (error) {
+        nextFunc(error)
+    }
+})
+
+// Get all trips ID's
+router.get('/tripsID', async (req: Request, res: Response, nextFunc: NextFunction) => {
+
+    try {
+        const trips = await getAllTripIDS()
         res.json(trips)
     } catch (error) {
         nextFunc(error)

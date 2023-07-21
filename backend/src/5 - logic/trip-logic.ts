@@ -6,9 +6,8 @@ import { resourceNotFound } from "../4 - models/ErrorModel";
 
 
 
-
+// Add new trip
 export const addNewTrip = async (newTrip: TripType): Promise<TripType> => {
-    
     
     if(newTrip.imageFile) {
         const getExtension = newTrip.imageFile.name.substring(newTrip.imageFile.name.lastIndexOf('.'))
@@ -37,16 +36,32 @@ export const addNewTrip = async (newTrip: TripType): Promise<TripType> => {
 }   
 
 
-export const getAllTrips = async (): Promise<TripType[]> => {
+// GEt all trip
+export const getAllTrips = async (): Promise<EditTripType[]> => {
 
     const query = `
     SELECT * FROM trip
     `
-    const trips = await executeSql(query) as TripType[]
+    const trips = await executeSql(query) as EditTripType[]
     return trips
 }
 
 
+// get all ID's of trips
+export const getAllTripIDS = async(): Promise<number[]> => {
+
+    const query = `
+    SELECT tripId FROM trip
+    `
+
+    const data = await executeSql(query)
+    const tripIds = data.map((obj) => obj.tripId); 
+    console.log(tripIds)
+    return tripIds
+
+}
+
+// Update trip
 export const updateTripLogic = async (updateTrip: TripType): Promise<TripType> => {
     
     if(updateTrip.imageFile) {
@@ -75,6 +90,7 @@ export const updateTripLogic = async (updateTrip: TripType): Promise<TripType> =
     return updateTrip
 }
 
+// Get one trip
 export const getOneTrip = async (id: number): Promise<EditTripType> => {
 
     const query = `
