@@ -1,0 +1,13 @@
+@font-face {
+    font-family: title;
+    src: url('../../../Assets/Fonts/BebasNeue-Regular.otf');
+  }
+
+
+.registerTitle {
+    font-family: title;
+    color: black;
+    text-align: center;
+    width: 100%;
+    margin: 0%;
+}

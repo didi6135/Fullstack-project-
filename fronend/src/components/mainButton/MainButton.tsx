@@ -1,4 +1,7 @@
 
+import './mainButton.css'
+
+
 interface MainButtonProps {
     title: string
     handleClick: () => void
@@ -7,6 +10,6 @@ interface MainButtonProps {
 export const MainButton = ({title, handleClick}: MainButtonProps) => {
 
     return <>
-    <button onClick={handleClick}>{title}</button>
+    <button className='mainButton' onClick={handleClick}>{title}</button>
     </>
 }

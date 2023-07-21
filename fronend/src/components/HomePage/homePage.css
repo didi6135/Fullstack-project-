@@ -1,0 +1,268 @@
+  @font-face {
+    font-family: title;
+    src: url('../../Assets/Fonts/BebasNeue-Regular.otf');
+  }
+  
+  body {
+    background-color: #2b3033;
+
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    height: 100%;
+    width: 100%; 
+    margin: 0%;
+    padding: 0%;
+  }
+
+  .homeContainer {
+  }
+
+  
+
+  .imageDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    width: 80%;
+    height: 80%;
+    background-image: url('../../Assets/Images/silhouette-wing-airplane-sunrise-view-through-window.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0;
+    animation: fade-in 2s ease-in forwards;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .navBar {
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    height: 80px;
+    width: 100%;
+
+  }
+
+  .fit {
+    display: flex;
+    align-items: center;
+  }
+
+  .login {
+    text-align: center;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+  }
+
+  .logo {
+    background-image: url('../../Assets/Images/Trip_for_you__1_-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top: 10;
+    width: 100px;
+    height: 100px;
+
+}
+
+.title {
+    position: relative;
+    top: 70%;
+    left: 50px;
+    font-family: title;
+    font-size: 100px;
+    display: inline-block;
+    color: white;
+    letter-spacing: 1vh;
+    margin: 0;
+    padding: 0;
+    width: 85%;
+}
+
+.title1 {
+    position: relative;
+    top: 25%;
+    left: 20%;
+    font-family: title;
+    font-size: 100px;
+    display: inline-block;
+    /* text-align: center; */
+    color: white;
+    letter-spacing: 1vh;
+    margin: 0;
+    padding: 0;
+    /* width: 100%; */
+
+
+}
+
+.hr {
+    border: 2px solid white;
+    width: 350px;
+    position: relative;
+    top: 0%;
+    right: 17.5%;
+}
+
+.description {
+    position: relative;
+    top: 5%;
+    left: 19%;
+    font-size: 25px;
+    /* width: 100vh; */
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1vh;
+    margin: 0%;
+    display: inline-block;
+
+}
+
+.socialMedia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  margin-right: 20px;
+}
+
+.iconHomePage {
+  margin-bottom: 30px; 
+  cursor: pointer;
+}
+
+.lineSide {
+  height: 130px;
+  position: absolute;
+  top: 70px;
+  right: 43px;
+  background: linear-gradient(#28F29C 0%, #02a3f7 100%);
+  border-radius: 8px;
+  padding: 1px;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 850px) {
+    .title {
+        position: relative;
+        top: 70%;
+        left: 50px;
+        font-family: title;
+        font-size: 80px;
+        display: inline-block;
+        /* text-align: center; */
+        color: white;
+        letter-spacing: 1vh;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .title1 {
+        position: relative;
+        top: 30%;
+        left: 20%;
+        font-family: title;
+        font-size: 80px;
+        display: inline-block;
+        /* text-align: center; */
+        color: white;
+        letter-spacing: 1vh;
+        margin: 0;
+        padding: 0;
+        /* width: 100%; */
+    
+    
+    }
+    
+    .hr {
+        border: 2px solid white;
+        width: 300px;
+        position: relative;
+        top: 0%;
+        right: 8%;
+    }
+    
+    .description {
+        position: relative;
+        top: 5%;
+        left: 10%;
+        font-size: 23px;
+        /* text-align: center; */
+        color: white;
+        font-weight: 600;
+        letter-spacing: 1vh;
+        margin: 0%;
+        display: inline-block;
+    
+    }
+}
+
+
+@media only screen and (max-width: 750px) {
+  .title {
+      position: relative;
+      top: 70px;
+      left: 50px;
+      font-family: title;
+      font-size: 50px;
+      display: inline-block;
+      color: white;
+      letter-spacing: 1vh;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+  }
+  
+  .title1 {
+      position: relative;
+      top: 70%;
+      left: 20%;
+      font-family: title;
+      font-size: 50px;
+      display: inline-block;
+      color: white;
+      letter-spacing: 1vh;
+      margin: 0;
+      padding: 0;
+  
+  }
+  
+  .hr {
+      border: 2px solid white;
+      width: 300px;
+      position: relative;
+      top: 70%;
+      left: 0px;
+  }
+  
+  .description {
+    position: relative;
+    top: 70%;
+    left: 0;
+    font-size: 23px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    white-space: pre-wrap;
+    /* word-wrap: break-word; */
+    /* word-break: break-word; */
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+  
+  }
+}

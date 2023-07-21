@@ -8,6 +8,7 @@ import { registerUser } from '../../../Services/authService';
 import { RegisterType } from '../../../types/RegisterType';
 import { useNavigate } from 'react-router-dom';
 
+import './register.css'
 
 // const style = {
 //     position: 'absolute' as 'absolute',
@@ -59,37 +60,42 @@ export const Register = () => {
 
 
     return <>
-              <Box >
-                <Typography variant='h3' gutterBottom>Register</Typography>
+              <div className='registerPage' >
+                <h1 className='registerTitle'>Welcome</h1>
                 <form action=''>
                     
                     <Typography sx={{color: 'red', fontSize: '13px'}}>
                       {errorMsg.split(' ')[0] === 'First' ? errorMsg : ''}
                     </Typography>
 
-                    <TextField name='firstName' onChange={handleInput} label="First Name"></TextField> <br/><br/>
+                    <TextField fullWidth variant="standard" name='firstName' onChange={handleInput} label="First Name"></TextField> <br/><br/>
                     
                     <Typography sx={{color: 'red', fontSize: '13px'}}>
                       {errorMsg.split(' ')[0] === 'Last' ? errorMsg : ''}
                     </Typography>
 
-                    <TextField name='lastName' onChange={handleInput} label="Last Name"></TextField><br/><br/>
+                    <TextField fullWidth variant="standard" name='lastName' onChange={handleInput} label="Last Name"></TextField><br/><br/>
                     
                     <Typography sx={{color: 'red', fontSize: '13px'}}>
                       {errorMsg.split(' ')[0] === 'Email' ? errorMsg : ''}
                     </Typography>
 
-                    <TextField name='email' onChange={handleInput} label="Email"></TextField><br/><br/>
+                    <TextField fullWidth variant="standard" name='email' onChange={handleInput} label="Email"></TextField><br/><br/>
 
-                    <TextField name='password' onChange={handleInput} label="Password"></TextField><br/><br/>
+                    <TextField fullWidth variant="standard" name='password' onChange={handleInput} label="Password"></TextField><br/><br/>
                     
                     <Typography sx={{color: 'red', fontSize: '13px'}}>
                       {errorMsg.split(' ')[0] === 'Password' ? errorMsg : ''}
                     </Typography>
 
-                    <Button onClick={checkRegister}>Register</Button> <br/><br/>
+                    <Button sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: 'auto'
+                    }} onClick={checkRegister}>Register</Button> <br/><br/>
                     
                 </form>
-              </Box>
+              </div>
     </>
 }

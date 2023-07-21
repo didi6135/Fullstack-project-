@@ -4,15 +4,26 @@ import { appConfig } from "../utils/appConfig";
 
 
 
-export const getAllVacations = async (token: string | undefined): Promise<TripType[]> => {
+export const getAllVacations = async (token: string | undefined): Promise<EditTripType[]> => {
 
     const response = await axios.get(appConfig.getAllVacationUrl, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    const trips = response.data as TripType[]
+    const trips = response.data as EditTripType[]
     return trips
+}
+
+export const getAllVacationsIDS = async (token: string): Promise<number[]> => {
+
+  const response = await axios.get(appConfig.getAllVacationIDUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  const trips = response.data as number[]
+  return trips
 }
 
 

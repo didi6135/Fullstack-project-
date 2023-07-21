@@ -9,17 +9,6 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 
 import './editTrip.css'
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
 
 export const EditTrip = () => {
 
@@ -119,76 +108,95 @@ export const EditTrip = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"> */}
 
-        {currentTrip ? <Box sx={style}>
+        {currentTrip ? 
+        <div className="editContainer">
+
             <form action="" encType="multipart/form-data">
-            <Typography>Destination:</Typography>
-            <TextField  defaultValue={currentTrip.destination} onChange={handleInput} name='destination' sx={{width: '250px'}} type={'text'}></TextField>
-            
-            
-            <Typography>Description:</Typography>
-            <textarea defaultValue={currentTrip.tripDescription} onChange={handleInput} name='tripDescription' placeholder="Add Description" rows={5} cols={31}/>
+            <div className="editTripDetails">
+              <Typography>Destination:</Typography>
+              <TextField 
+              variant="standard"  
+              defaultValue={currentTrip.destination} 
+              onChange={handleInput} 
+              name='destination' 
+              sx={{width: '250px'}} 
+              type={'text'}></TextField>
 
-            <Typography>Start on:</Typography>
-            <input 
-            defaultValue={currentTrip.dateStart.slice(0, 10)}
-            onChange={handleInput} 
-            name='dateStart' 
-            type="date"
-            />
+              <Typography>Description:</Typography>
+              <textarea defaultValue={currentTrip.tripDescription} onChange={handleInput} name='tripDescription' placeholder="Add Description" rows={5} cols={31}/>
 
-            <Typography>End on:</Typography>
-            <input 
-            defaultValue={currentTrip.dateEnd.slice(0, 10)}
-            onChange={handleInput} 
-            name='dateEnd' 
-            type="date" />
+              <Typography>Start on:</Typography>
+              <input 
+              defaultValue={currentTrip.dateStart.slice(0, 10)}
+              onChange={handleInput} 
+              name='dateStart' 
+              type="date"
+              />
 
-            <Typography>Price:</Typography>
-            <input 
-            defaultValue={currentTrip.price}
-            onChange={handleInput} 
-            name='price' 
-            type="number" />
+              <Typography>End on:</Typography>
+              <input 
+              defaultValue={currentTrip.dateEnd.slice(0, 10)}
+              onChange={handleInput} 
+              name='dateEnd' 
+              type="date" />
 
-            <Typography>Cover image:</Typography>
-            <input 
-            type="file"
-            style={{ display: 'none' }}
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            accept="image/*"
-            />
-            <button 
-            type="button" 
-            className="inputImage" 
-            onClick={() => {
-              if(previewImage) {
-                handleImageRemove()
-              } else {
-                fileInputRef.current?.click()
-              }
-            }}>
-                {previewImage ? 'Remove Image' : 'Upload image'}
-            </button>
-      
-            <div className="imageDiv">
+              <Typography>Price:</Typography>
+              <input 
+              defaultValue={currentTrip.price}
+              onChange={handleInput} 
+              name='price' 
+              type="number" />
+            </div>
+           
+          <div className="coverImageDiv">
+          <h3 className="coverImageTitle">Cover image:</h3>
+
+            <div className="editImageDiv">
                 {previewImage ? 
                 <img 
-                 className="image"
+                 className="editImage"
                  src={previewImage} 
                  alt={currentTrip.imageName} />
                  :
                 <AddPhotoAlternateOutlinedIcon 
                 sx={{
                     fontSize: '100px', 
+                    height: '300px',
                     display: 'flex', 
                     alignItems: 'center', 
-                    margin: 'auto'}} 
+                    margin: 'auto'
+                  }} 
                 />}
             </div>
-            <Button onClick={handleSubmit}>Add new trip</Button>
+
+            <div className="buttonToUploadImageOrRemove">
+                <input 
+                  type="file"
+                  style={{ display: 'none' }}
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  />
+            
+              <button 
+                type="button" 
+                className="coverImageButton"  
+                onClick={() => {
+                  if(previewImage) {
+                    handleImageRemove()
+                  } else {
+                    fileInputRef.current?.click()
+                  }
+                }}>
+                {previewImage ? 'Remove Image' : 'Upload image'}
+              </button>
+            </div>
+
+          </div>
             </form>
-        </Box> : <h1>Loading...</h1>}
+            <hr className="hrEditTrip"/>
+            <button className="editTripButton" onClick={handleSubmit}>Edit trip</button>
+        </div> : <h1>Loading...</h1>}
       {/* </Modal> */}
     </>
 }

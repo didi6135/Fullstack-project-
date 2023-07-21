@@ -7,6 +7,7 @@ import { LoginCredentialsType } from '../../../types/LoginCredentialsType';
 import { loginUser } from '../../../Services/authService';
 import { useNavigate } from 'react-router-dom';
 
+import './login.css'
 
 export const Login = () => {
 
@@ -45,21 +46,26 @@ export const Login = () => {
   }
 
     return <>
-        <div>
-              <Box >
-              <Typography variant='h3' gutterBottom>Login</Typography>
+        <div className='loginPage'>
+              <div  >
+              <h1 className='loginTitle'>Login</h1>
                 <form action=''>
                 <Typography sx={{color: 'red', fontSize: '13px'}}>{errorMsg.split(' ')[0] === 'Incorrect' ? errorMsg : ''}</Typography>
                 <Typography sx={{color: 'red', fontSize: '13px'}}>{errorMsg.split(' ')[0] === 'Email' ? errorMsg : ''}</Typography>
-                    <TextField name='email' onChange={handleInput} label="Email"></TextField><br/><br/>
+                    <TextField fullWidth variant="standard" name='email' onChange={handleInput} label="Email"></TextField><br/><br/>
 
-                    <TextField name='password' onChange={handleInput} label="Password"></TextField><br/><br/>
+                    <TextField fullWidth variant="standard" name='password' onChange={handleInput} label="Password"></TextField><br/><br/>
                     <Typography sx={{color: 'red', fontSize: '13px'}}>{errorMsg.split(' ')[0] === 'Password' ? errorMsg : ''}</Typography>
                 
 
-                    <Button onClick={checkLogin}>Login</Button> <br/><br/>
+                    <Button sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: 'auto'
+                    }} onClick={checkLogin}>Login</Button> <br/><br/>
                 </form>
-              </Box>
+              </div>
           </div>
 
     </>

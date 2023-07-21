@@ -1,0 +1,27 @@
+
+
+.modelConnect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f0f0f0;
+    width: 350px;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    background-image: url('../../Assets/Images/Trip_for_you__1_-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top: 10;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,11 @@
+
+
+.mainButton {
+    cursor: pointer;
+    padding: 7px 10px 7px 10px;
+    color: rgb(126, 126, 126);
+    margin: 10px;
+    border-radius: 7px;
+    border: 2px solid rgb(126, 126, 126);
+    background-color: rgb(255, 255, 255);
+}

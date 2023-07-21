@@ -1,6 +1,6 @@
 import axios from "axios";
 import { LoginCredentialsType } from "../types/LoginCredentialsType";
-import { RegisterType } from "../types/RegisterType";
+import { NewPasswordType, RegisterType, UpdateUserDetailsType } from "../types/RegisterType";
 import { appConfig } from "../utils/appConfig";
 
 
@@ -8,15 +8,12 @@ import { appConfig } from "../utils/appConfig";
 export const registerUser = async (user: RegisterType): Promise<string> => {
 
     const response = await axios.post(appConfig.registerUrl, user)
-
     const token = response.data
-
     return token
 }
 
 export const loginUser = async (credential: LoginCredentialsType) :Promise<string[]> => {
     const response = await axios.post(appConfig.loginUrl, credential)
-
     const token = response.data
     return token
 }
@@ -35,9 +32,16 @@ export const getUserDetails = async (userId:number): Promise<RegisterType> => {
     return details
 }
 
-export const changePassword = async(userId: number, newPass: string): Promise<string> => {
+export const changePassword = async(userId: number, newPass: NewPasswordType): Promise<string> => {
     const response = await axios.put(appConfig.changePasswordUrl + `/${userId}`, newPass)
-    console.log(response.config)
+
     const result = response.data
     return result
 } 
+
+export const updateDetailsService = async (userId: number, userDetails: UpdateUserDetailsType): Promise<string> => {
+    const response = await axios.put(appConfig.updateUserDetailsUrl + `/${userId}`, userDetails)
+
+    const info = response.data
+    return info
+}

@@ -3,13 +3,15 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { addLikeToTrip, checkingFollow, getAllFollowersService, removingFollowFromTrip } from "../../../Services/followersService"
 import { FollowersType } from "../../../types/followerType"
-import { TripType } from "../../../types/TripType"
+import { EditTripType, TripType } from "../../../types/TripType"
 import { MainButton } from "../../mainButton/MainButton"
 
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import './vacationCard.css'
 
 interface TripProps {
-    trip: TripType
+    trip: EditTripType
 }
 
 export const VacationCard = ({trip}: TripProps) => {
@@ -101,26 +103,8 @@ export const VacationCard = ({trip}: TripProps) => {
             .catch(err => console.log(err))
 
         }
-
 }
 
-    // const handleLike = async () => {
-
-    //     try {
-    //         setAllLikes(prevLikes => prevLikes + (myLike ? 1 : -1));
-    //         if(tokenFixed && userID) {
-    //             setAddNewLike(prev => ({...prev, userId: +userID, TripId: trip.TripId}))
-
-    //             if(addNewLike) {
-    //                 console.log(addNewLike)
-    //                 await addLikeToTrip(tokenFixed, trip.TripId, addNewLike)
-    //             }
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // }
     
     const handleDelete = () => {
 
@@ -131,34 +115,29 @@ export const VacationCard = ({trip}: TripProps) => {
 
     }
     return <>
-        <div className="tripCard">
-            <img width={300} src={imageUrl} alt="" />
-            <h2>{trip.destination}</h2>
-            <br/>
-            <p className="description">{trip.tripDescription}</p>
-            <br/>
-            <h4>{trip.dateStart.slice(0, 10)}</h4>
-            <br/>
-            <h4>{trip.dateEnd.slice(0, 10)}</h4>
-            <br/>
-            <h4>{trip.price}</h4>
+        <div className="tripCard"> 
+            <img className="tripImage" src={imageUrl} alt="" />
+        
+        {/* <div className="tripDetails"> */}
+            <h2 className="tripDestination">{trip.destination}</h2>
+            <p className="tripDescription">{trip.tripDescription}</p>
+            <h4 className="tripDateStart">{trip.dateStart.slice(0, 10)}</h4>
+            <h4 className="tripDAteEnd">{trip.dateEnd.slice(0, 10)}</h4>
+            <h4 className="tripPrice">$ {trip.price}</h4>
+        {/* </div> */}
 
         {roleFixed === "admin" ? 
         <><MainButton title="Edit" handleClick={handleEdit} />
         <MainButton title="Delete" handleClick={handleDelete} /></>
          :             
          <button 
-         className={myLike ? 'like' : ''} 
-         onClick={handleMyLike}>Like: {allLikes}</button>
+         className={myLike ? 'like' : 'disLike'} 
+         
+         onClick={handleMyLike}>
+          {myLike ? <FavoriteOutlinedIcon fontSize="small"/>: <FavoriteBorderOutlinedIcon fontSize="small"/> } 
+          &nbsp; Like: {allLikes}</button>
          }
         </div>
     </>
 
-
 }
-
-
-// 1. יצירת כפתור שיש אפשרות לעשות לייק לטיול///////
-// 2. עם עשו לייק שיהיה בצבע אדום ושלא תהיה אפשרות לעשות עוד לייק אלא רק להוריד את הלייק
-// 3. להציג למשתמש בטעינת הדף איזה טיולים הוא כבר עשה להם לייק
-// 4. להציג על כל טיול כמה לייקים יש אותו טיול

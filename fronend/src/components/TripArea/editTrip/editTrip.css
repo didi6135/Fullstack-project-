@@ -1,18 +1,106 @@
 
-
-.imageDiv {
-    display: flex;
-    position: relative;
-    width: 300px;
-}
-
-.image {
-   
-    width: 300px;
-}
-/* .inputImage {
+.editContainer {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: 'translate(-50%, -50%)',
+    transform: translate(-50%, -50%);
+    background-color: aliceblue;
+    width: 70%;
+    height: 70%;
+    border-radius: 15px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.editTripDetails {
+    display: inline-block;
+    align-items: center; 
+    justify-content: center;
+    padding-left: 50px;
+    padding-top: 100px;
+}
+
+.coverImageDiv {
+    /* display: flex;
+    align-items: center; 
+    justify-content: center; */
+}
+
+.coverImageTitle {
+    text-align: center;
+}
+
+/* .editImageDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding-bottom: 20px;
+    position: relative;
+    width: 300px;
 } */
+
+.buttonToUploadImageOrRemove {
+
+}
+
+.editImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding-bottom: 20px;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.coverImageButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 10px 20px 10px 20px;
+    border-radius: 7px;
+    border: 2px solid #02A3F7;
+    background-color: aliceblue;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: title;
+    color: #02A3F7;
+    cursor: pointer;
+}
+
+.hrEditTrip {
+    width: 90%;
+    border: 2px solid #02A3F7;
+    border-radius: 50%;
+    margin-top: 30px;
+
+}
+
+.editTripButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px 30px 20px 30px;
+    border-radius: 7px;
+    border: 2px solid #02A3F7;
+    background-color: aliceblue;
+    font-size: 18px;
+    font-family: title;
+    color: #02A3F7;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.editTripButton:hover {
+    transform: scale(0.95); /* Sunk effect on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

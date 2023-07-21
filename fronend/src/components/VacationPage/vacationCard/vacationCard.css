@@ -1,19 +1,72 @@
 
+  @font-face {
+    font-family: title;
+    src: url('../../../Assets/Fonts/BebasNeue-Regular.otf');
+  }
 
 .tripCard {
-    border: 1px solid black;
+    border-radius: 15px;
     flex-wrap: wrap;
     width: 300px;
     text-align: center;
     margin: 10px;
+    background-color: white;
 }
 
-.description {
+.tripImage {
+    border-top-left-radius: 15px 15px;
+    border-top-right-radius: 15px 15px;
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.tripDestination {
+    font-family: title;
+    letter-spacing: 0.7vh;
+}
+
+.tripDescription {
     line-break: anywhere;
 }
 
+.tripDateStart {
+
+}
+
+.tripDAteEnd {
+
+}
+
+.tripPrice {
+
+}
+
 .like {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 7px 7px 7px 7px;
     color: red;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    border: 2px solid red;
+    background-color: rgba(255, 0, 0, 0.151);
+
+}
+
+.disLike {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 7px 7px 7px 7px;
+    color: rgb(126, 126, 126);
+    margin-bottom: 15px;
+    border-radius: 50px;
+    border: 2px solid rgb(126, 126, 126);
+    background-color: rgb(255, 255, 255);
 }
 
 .dislike {

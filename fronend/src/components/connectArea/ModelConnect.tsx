@@ -1,9 +1,10 @@
 import { Box, Button, Modal } from "@mui/material";
+import { url } from "inspector";
 import { useState } from "react";
 import { Login } from "./login/Login";
 import { Register } from "./register/Register";
 
-
+import './modelConnect.css'
 
 
 const style = {
@@ -13,7 +14,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    borderRadius: '15px',
     boxShadow: 24,
     p: 4,
   };
@@ -41,18 +42,35 @@ export const ModelConnect = () => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description">
-            <Box sx={style}>
+          <div className="modelConnect"
+
+            // sx={{
+            //   position: 'absolute' as 'absolute',
+            //   top: '50%',
+            //   left: '50%',
+            //   transform: 'translate(-50%, -50%)',
+            //   width: 400,
+            //   // backgroundImage: url('../../Assets/Images/full-shot-woman-travel-concept.jpg')
+            //   backdropFilter: blur('20px')
+            // }}
+            >
+              <div className="logo2"></div>
                 {login ? <Login/> :<Register/>}
 
                 <Button
-                 sx={{textTransform: "capitalize"}}
+                 sx={{
+                  textTransform: "capitalize",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: 'auto'}}
                  onClick={handleRegister} >
                     {login ? 
                     "Don't have account sign up"
                      :
                     "Already have an account Login"}
                 </Button>
-            </Box>
+            </div>
         </Modal>
       </div>
     );
