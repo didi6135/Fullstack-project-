@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 import { verifyAdmin } from '../2 - utils/verifyRole';
-import { LoginCredentialsType, NewPasswordType, UserType } from '../4 - models/UserModel';
+import { LoginCredentialsType, NewPasswordType, UserResponse, UserType } from '../4 - models/UserModel';
 import { changePassword, getUserDetails, LoginUserLogic, registerUserLogic, updateUserDetails } from '../5 - logic/auth-logic';
 
 
@@ -62,7 +62,7 @@ router.put('/auth/updateDetails/:id([0-9]+)', async (req: Request, res: Response
     try {
 
         const userId = +req.params.id 
-        const details = req.body
+        const details = req.body as UserResponse
         const userData = await updateUserDetails(userId, details)
         res.status(200).json(userData);
     } catch (err: any) {

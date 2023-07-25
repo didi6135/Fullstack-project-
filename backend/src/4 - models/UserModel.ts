@@ -4,6 +4,15 @@ import { isEmailExist, validationError } from './ErrorModel'
 
 export type RuleType = "admin" | "user"
 
+export type UserResponse = {
+  id: number,
+  firstName: string,
+  lastName: string,
+  email: string,
+  role: string,
+  token: string
+}
+
 export type LoginCredentialsType = {
     email: string
     password: string
@@ -19,6 +28,7 @@ export type UserType = {
 }
 
 export type NewPasswordType = {
+  currentPassword: string
   newPassword: string
 }
 
@@ -87,13 +97,16 @@ export const registerUserValidateSchema = Joi.object({
 })
 
 export const newPasswordSchema = Joi.object({
-  newPassword: passwordValidation
+  currentPassword: passwordValidation,
 })
 
 export const updateUserDetailsSchema = Joi.object({
+  id: Joi.number().optional() ,
   firstName: firstNameValidation,
   lastName: lastNameValidation,
-  email: mailValidation
+  email: mailValidation,
+  role: Joi.string() ,
+  token: Joi.string().required(),
 })
 
 export const validateUserRegister = (user: UserType) => {
@@ -110,14 +123,14 @@ export const validateUserLogin = (credentials: LoginCredentialsType) => {
   }
 }
 
-export const validateNewPassword = (newPass: NewPasswordType) => {
-  const result = newPasswordSchema.validate(newPass)
+export const validateNewPassword = (currentPassword: string) => {
+  const result = newPasswordSchema.validate({currentPassword})
   if(result.error) {
     validationError(result.error.message)
   }
 }
 
-export const validateUpdateUser = (userDetails: UpdateUserDetailsType) => {
+export const validateUpdateUser = (userDetails: UserResponse) => {
   const result = updateUserDetailsSchema.validate(userDetails)
   if(result.error) {
     validationError(result.error.message)

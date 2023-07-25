@@ -104,18 +104,17 @@ export const countFollowersPerTrip = async (tripID: number):Promise<any> => {
 
 
 export const downloadSummeryToCSV = async() => {
-
-const query = `
-SELECT trip.destination, COUNT(followers.userId) AS followerCount
-FROM trip 
-LEFT JOIN followers ON trip.tripId = followers.tripId 
-WHERE trip.tripId = trip.tripId GROUP BY trip.destination;
-`;
-
+    
 try {
+    const query = `
+    SELECT trip.destination, COUNT(followers.userId) AS followerCount
+    FROM trip 
+    LEFT JOIN followers ON trip.tripId = followers.tripId 
+    WHERE trip.tripId = trip.tripId GROUP BY trip.destination;
+    `;
+
     const getData = await executeSql(query);
     const csvContent = getData
-    
       .map((row) => `${row.destination},${row.followerCount}`)
       .join('\n');
     fs.writeFileSync('data.csv', csvContent);

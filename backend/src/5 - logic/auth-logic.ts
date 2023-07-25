@@ -1,9 +1,10 @@
+import { response } from "express";
 import { OkPacket } from "mysql";
 import { executeSql } from "../2 - utils/dal";
 import { getNewTokenForLogin, getNewTokenForRegister } from "../2 - utils/verifyAndCreateToken";
 import { verifyAdmin } from "../2 - utils/verifyRole";
-import { isEmailExist } from "../4 - models/ErrorModel";
-import { LoginCredentialsType, NewPasswordType, UpdateUserDetailsType, UserType, validateNewPassword, validateUpdateUser, validateUserLogin, validateUserRegister } from "../4 - models/UserModel";
+import { isEmailExist, validationError } from "../4 - models/ErrorModel";
+import { LoginCredentialsType, NewPasswordType, UpdateUserDetailsType, UserResponse, UserType, validateNewPassword, validateUpdateUser, validateUserLogin, validateUserRegister } from "../4 - models/UserModel";
 
 
 
@@ -29,7 +30,7 @@ export const getIdByEmail = async(email:string): Promise<number> => {
 
 
 
-export const registerUserLogic = async (user: UserType): Promise<Array<string | number>> => {
+export const registerUserLogic = async (user: UserType): Promise<UserResponse> => {
    const check = await checkIsEmailExist(user.email)
    
     if(check[0].count >= 1) {
@@ -50,11 +51,20 @@ export const registerUserLogic = async (user: UserType): Promise<Array<string | 
     
         const info: OkPacket = await executeSql(query)
         const id =  info.insertId
-        return [token, 'user', id] 
+        const response: UserResponse = {
+            id: id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            token: token
+
+        }
+        return response 
 } 
 
 
-export const LoginUserLogic = async (credentials: LoginCredentialsType): Promise<Array<string | number>> => {
+export const LoginUserLogic = async (credentials: LoginCredentialsType): Promise<UserResponse> => {
 
     const check = await checkIsEmailExist(credentials.email)
 
@@ -77,9 +87,29 @@ export const LoginUserLogic = async (credentials: LoginCredentialsType): Promise
     if(sql[0]) {
         const checkRole = await verifyAdmin(credentials.email)
         if(checkRole) {
-            return [token, 'admin', id]
+            const user = await getUserDetails(id)
+            const response: UserResponse = {
+                id: id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role,
+                token: token
+    
+            }
+            return response
         } else {
-            return [token, 'user', id]
+            const user = await getUserDetails(id)
+            const response: UserResponse = {
+                id: id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role,
+                token: token
+    
+            }
+            return response
     
         }
     } else {
@@ -96,33 +126,37 @@ export const getUserDetails = async(userId: number): Promise<UserType> => {
     SELECT * FROM users WHERE id = ${userId}
     `
 
-    const userData = await executeSql(query) as UserType
+    const userData = await executeSql(query) as UserResponse
     return userData[0]
 
 }
 
 export const changePassword = async(userId: number, newPass: NewPasswordType): Promise<string> => {
 
-    validateNewPassword(newPass)
+    validateNewPassword(newPass.newPassword)
 
+    const getCurrentPass = await getUserDetails(userId) 
+    console.log(getCurrentPass.password)
+    if(getCurrentPass.password === newPass.currentPassword ) {
+        const query = `
+        UPDATE users SET 
+        password = "${newPass.newPassword}"
+        WHERE id = ${userId}
+        `
+    
+        const info: OkPacket = await executeSql(query)
+        if(info.affectedRows === 1) {
+            return 'Your Password changed successfully' 
+        } else if (info.affectedRows === 0) {
+            return 'Your password has not been changed'
+        }
 
-    const query = `
-    UPDATE users SET 
-    password = "${newPass.newPassword}"
-    WHERE id = ${userId}
-    `
-
-    const info: OkPacket = await executeSql(query)
-    if(info.affectedRows === 1) {
-        return 'Your Password changed successfully' 
-    } else if (info.affectedRows === 0) {
-        return 'Your password has not been changed'
+    } else {
+        return validationError('This is not your password')
     }
-
 }
 
-export const updateUserDetails = async (userId: number, userDetails: UpdateUserDetailsType): Promise<string> => {
-
+export const updateUserDetails = async (userId: number, userDetails: UserResponse): Promise<UserResponse | string> => {
     validateUpdateUser(userDetails)
 
     const query = `
@@ -133,10 +167,16 @@ export const updateUserDetails = async (userId: number, userDetails: UpdateUserD
     WHERE id = ${userId}
     `
 
-    const info: OkPacket = await executeSql(query)
-    if(info.affectedRows === 1) {
-        return 'Your Details changed successfully' 
-    } else if (info.affectedRows === 0) {
-        return 'Your Details has not been changed'
-    }
+    await executeSql(query)
+
+        const response: UserResponse = {
+            id: userDetails.id,
+            firstName: userDetails.firstName,
+            lastName: userDetails.lastName,
+            email: userDetails.email,
+            role: userDetails.role,
+            token: userDetails.token
+        
+        }
+        return response
 }

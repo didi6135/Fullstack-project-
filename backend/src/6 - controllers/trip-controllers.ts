@@ -80,7 +80,7 @@ router.get('/image/:imageName', async (req: Request, res: Response, nextFunc: Ne
 
     try {
         const imageFolderPath = path.join(__dirname,'..', '1 - Assets', 'images')
-
+ 
         const image = req.params.imageName
         const imageUrl = path.join(imageFolderPath, image)
         res.sendFile(imageUrl)

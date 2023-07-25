@@ -86,5 +86,16 @@ router.delete('/deleteFollow/:userId([0-9]+)/:tripId([0-9]+)',  async (req: Requ
     }
 })
 
+// Download CSV summert
+router.get('/download-csv',  async (req: Request, res: Response, nextFunc: NextFunction) => {
+
+    try {
+        const csvFile = downloadSummeryToCSV()
+        res.send(csvFile)
+    } catch (error) {
+        nextFunc(error)
+    }
+})
+
 
 export default router;
