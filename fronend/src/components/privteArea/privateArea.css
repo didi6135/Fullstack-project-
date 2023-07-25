@@ -2,11 +2,16 @@
 .allDetails {
     /* margin: auto; */
     /* width: 60%; */
-    text-align: center;
+    text-align: center; 
+    color: aliceblue;
 
 }
 
-
+.buttonPrivateArea {
+    display: flex;
+    align-items: center;
+    
+}
 
 .fullName {
     

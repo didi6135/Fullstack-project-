@@ -9,6 +9,8 @@ import { MainButton } from "../../mainButton/MainButton"
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import './vacationCard.css'
+import { useAppSelector } from "../../../app/hooks"
+import { UserResponse } from "../../../types/RegisterType"
 
 interface TripProps {
     trip: EditTripType
@@ -19,23 +21,12 @@ export const VacationCard = ({trip}: TripProps) => {
 
     const [imageUrl, setImageUrl] = useState('')
 
-    const [addNewLike, setAddNewLike] = useState<FollowersType>({
-        userId: 0, TripId: 0
-    })
-
     const [allLikes, setAllLikes] = useState(0)
     const [myLike, setMyLike] = useState(false)
 
-// Get the token from local storage 
-    const token = localStorage.getItem('Token')
-    const tokenFixed = token?.replace(/["]/g, '')
-    
-// Get the role from local storage
-    const role = localStorage.getItem('role')
-    const roleFixed = role?.replace(/["]/g, '')
-  
-// Get the user ID from local storage
-    const userID = localStorage.getItem('id')
+
+    const selector = useAppSelector(state => state.user.user) as UserResponse
+
 
 
 
@@ -57,21 +48,21 @@ export const VacationCard = ({trip}: TripProps) => {
 // Get the trip the user is follow
     useEffect(() => {
         const checkIfUserFollow = async () => {
-            if(userID && trip.TripId) {
-                await checkingFollow(+userID, trip.TripId)
+            if(selector && trip.TripId) {
+                await checkingFollow(selector.id, trip.TripId)
                 .then(res => {if(res) setMyLike(true)})
                 .catch(err => console.log(err))
             }
         }
         checkIfUserFollow()
-    }, [trip.TripId, userID])
+    }, [trip.TripId, selector?.id])
 
 
     
     useEffect(() => {
         const getfollowers = async() => {
-          if(tokenFixed) {
-            await getAllFollowersService(tokenFixed, trip.TripId)
+          if(selector) {
+            await getAllFollowersService(selector.token, trip.TripId)
             .then(likes => setAllLikes(likes))
             .catch(err => console.log(err))
           }
@@ -82,8 +73,8 @@ export const VacationCard = ({trip}: TripProps) => {
 
 
     const handleMyLike = async () => {
-        if(myLike && userID && trip.TripId) {
-                await removingFollowFromTrip(+userID, trip.TripId)
+        if(myLike && selector && trip.TripId) {
+                await removingFollowFromTrip(selector.id, trip.TripId)
                 .then(res => {
                     if(res) {
                         setAllLikes(prevLikes => prevLikes + (myLike ? -1 : 1));
@@ -91,9 +82,9 @@ export const VacationCard = ({trip}: TripProps) => {
                     }
                 })
                 .catch(err => console.log(err))
-        } else if (!myLike && userID && trip.TripId && tokenFixed) {
+        } else if (!myLike && selector && trip.TripId) {
             // setAddNewLike(prev => ({...prev, userId: +userID, TripId: trip.TripId}))
-            await addLikeToTrip(tokenFixed, +userID, trip.TripId)
+            await addLikeToTrip(selector.token, selector.id, trip.TripId)
             .then(res => {
                 if(res) {
                     setAllLikes(prevLikes => prevLikes + (myLike ? -1 : 1));
@@ -126,7 +117,7 @@ export const VacationCard = ({trip}: TripProps) => {
             <h4 className="tripPrice">$ {trip.price}</h4>
         {/* </div> */}
 
-        {roleFixed === "admin" ? 
+        {selector?.role === "admin" ? 
         <><MainButton title="Edit" handleClick={handleEdit} />
         <MainButton title="Delete" handleClick={handleDelete} /></>
          :             

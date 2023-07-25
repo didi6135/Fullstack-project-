@@ -8,10 +8,14 @@ import { loginUser } from '../../../Services/authService';
 import { useNavigate } from 'react-router-dom';
 
 import './login.css'
+import { useAppDispatch } from '../../../app/hooks';
+import { setUser } from '../../../features/userSlice/UserSlice';
 
 export const Login = () => {
 
   const navigate = useNavigate()
+
+  const dispatch = useAppDispatch()
 
       const [ loginInfo, setLoginInfo] = useState<LoginCredentialsType>({
         email: '',
@@ -29,9 +33,7 @@ export const Login = () => {
 
       await loginUser(loginInfo)
       .then(res => {
-        localStorage.setItem('Token', JSON.stringify(res[0]))
-        localStorage.setItem('role', JSON.stringify(res[1]))
-        localStorage.setItem('id', JSON.stringify(res[2]))
+          dispatch(setUser(res))
         navigate('/vacationPage')
       })
       .catch(err => {

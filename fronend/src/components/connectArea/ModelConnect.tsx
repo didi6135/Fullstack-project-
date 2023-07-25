@@ -36,24 +36,16 @@ export const ModelConnect = () => {
   
     return (
       <div>
-        <Button onClick={handleOpen}>Register / Login</Button>
+        <Button sx={{
+          color: 'white',
+          border: '1px solid white'
+        }} onClick={handleOpen}>Register / Login</Button> 
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description">
-          <div className="modelConnect"
-
-            // sx={{
-            //   position: 'absolute' as 'absolute',
-            //   top: '50%',
-            //   left: '50%',
-            //   transform: 'translate(-50%, -50%)',
-            //   width: 400,
-            //   // backgroundImage: url('../../Assets/Images/full-shot-woman-travel-concept.jpg')
-            //   backdropFilter: blur('20px')
-            // }}
-            >
+          <div className="modelConnect">
               <div className="logo2"></div>
                 {login ? <Login/> :<Register/>}
 

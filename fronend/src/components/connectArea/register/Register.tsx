@@ -9,22 +9,14 @@ import { RegisterType } from '../../../types/RegisterType';
 import { useNavigate } from 'react-router-dom';
 
 import './register.css'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { setUser } from '../../../features/userSlice/UserSlice';
 
-// const style = {
-//     position: 'absolute' as 'absolute',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     width: 400,
-//     bgcolor: 'background.paper',
-//     border: '2px solid #000',
-//     boxShadow: 24,
-//     p: 4,
-//   };
 
 export const Register = () => {
 
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
       const [userInfo, setUserInfo] = useState<RegisterType>({
         firstName: '',
@@ -44,12 +36,11 @@ export const Register = () => {
         try {
           await registerUser(userInfo)
           .then(res => {
-            localStorage.setItem('Token', JSON.stringify(res[0]))
-            localStorage.setItem('role', JSON.stringify(res[1]))
-            localStorage.setItem('id', JSON.stringify(res[2]))
+            dispatch(setUser(res))
             navigate('/vacationPage')
           })
           .catch(err => {
+            console.log(err)
             setError(prev => prev = err.response.data)
           })
         } catch (error) {
@@ -77,7 +68,7 @@ export const Register = () => {
                     <TextField fullWidth variant="standard" name='lastName' onChange={handleInput} label="Last Name"></TextField><br/><br/>
                     
                     <Typography sx={{color: 'red', fontSize: '13px'}}>
-                      {errorMsg.split(' ')[0] === 'Email' ? errorMsg : ''}
+                      {errorMsg.split(' ')[0] === 'Email' || errorMsg.split(' ')[0] === 'This' ? errorMsg : ''}
                     </Typography>
 
                     <TextField fullWidth variant="standard" name='email' onChange={handleInput} label="Email"></TextField><br/><br/>

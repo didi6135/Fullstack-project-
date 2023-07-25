@@ -1,0 +1,19 @@
+
+
+.chartManage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 400px;
+    /* height: 200px; */
+}
+
+.tripFollower {
+    display: flex;
+    align-items: center;
+    color: aliceblue;
+    font-weight: 400;
+    
+
+}

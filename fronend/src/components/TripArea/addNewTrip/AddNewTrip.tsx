@@ -1,127 +1,212 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { addNewTrip } from "../../../Services/tripService";
 import { TripType } from "../../../types/TripType";
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 
 export const AddNewTrip = () => {
+  const [open, setOpen] = useState(false);
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
-    const [errorMsg, setError] = useState('')
+  const handleClose = () => {
+    setOpen(false)
+    setTripValue({    
+      TripId: 0,
+      destination: "",
+      tripDescription: "",
+      dateStart: "",
+      dateEnd: "",
+      price: 0,
+      imageFile: null,
+      imageName: "",})
+  };
 
-    const [tripValue, setTripValue] = useState<TripType>({
-        TripId: 0,
-        destination: '',
-        tripDescription: '',
-        dateStart: '',
-        dateEnd: '',
-        price: 0,
-        imageFile: null,
-        imageName: ''
+  const [errorMsg, setError] = useState("");
+  const [previewImage, setPreviewImage] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-    })
+  const [tripValue, setTripValue] = useState<TripType>({
+    TripId: 0,
+    destination: "",
+    tripDescription: "",
+    dateStart: "",
+    dateEnd: "",
+    price: 0,
+    imageFile: null,
+    imageName: "",
+  });
 
-    const handleInput = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-        setTripValue(prev => ({...prev, [event.target.name]: event.target.value}))
-  }
+
+  const handleInput = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setTripValue((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   const handleSubmit = async () => {
-
     try {
       await addNewTrip(tripValue)
-      .then(res => console.log(res))
-      .catch(err => setError(prev => prev = err.response.data))
-      
+        .then((res) => console.log(res))
+        .catch((err) => setError((prev) => (prev = err.response.data)));
     } catch (error) {
-      console.log(error)
-    }
-
-  }
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    
-    const file = event.target.files?.[0];
-    if (file) {
-      setTripValue(prev => ({ ...prev, imageFile: file}));
+      console.log(error);
     }
   };
 
-    return <>
-      <Button onClick={handleOpen}>Add new trip</Button>
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log(file);
+    if (file) {
+      setTripValue((prev) => ({
+        ...prev,
+        imageName: file.name,
+        imageFile: file,
+      }));
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleImageRemove = () => {
+    setPreviewImage("");
+  };
+
+  return (
+    <>
+      <Button
+        sx={{
+          color: "white",
+          border: "1px solid white",
+        }}
+        onClick={handleOpen}
+      >
+        Add new trip
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
+        aria-describedby="modal-modal-description"
+      >
+        <div className="editContainer">
+          <form
+            className="editTripForm"
+            action=""
+            encType="multipart/form-data"
+          >
+            <div className="editTripDetails">
+              <Typography>Destination:</Typography>
+              <TextField
+                variant="standard"
+                onChange={handleInput}
+                name="destination"
+                sx={{ width: "250px" }}
+                type={"text"}
+              ></TextField>
+              {errorMsg.split(" ")[0] === '"destination"' ? errorMsg : ""}
 
-        <Box sx={style}>
-            <form action="" encType="multipart/form-data">
+              <Typography>Description:</Typography>
+              <textarea
+                className="descriptionEditTrip"
+                onChange={handleInput}
+                name="tripDescription"
+                placeholder="Add Description"
+                rows={5}
+                cols={25}
+              />
+              {errorMsg.split(" ")[0] === '"tripDescription"' ? errorMsg : ""}
 
-            <Typography>Destination:</Typography>
-            <Typography 
-            sx={{color: 'red', fontSize: '13px'}}>
-              {errorMsg.split(' ')[0] === '"destination"' ? errorMsg : ''}
-            </Typography>
-            <TextField onChange={handleInput} name='destination' sx={{width: '250px'}} type={'text'}></TextField>
-            
-            <Typography>Description:</Typography>           
-            <Typography 
-            sx={{color: 'red', fontSize: '13px'}}>
-              {errorMsg.split(' ')[0] === '"tripDescription"' ? errorMsg : ''}
-            </Typography>
-            <textarea onChange={handleInput} name='tripDescription' placeholder="Add Description" rows={5} cols={31}/>
+              <Typography>Start on:</Typography>
+              <input
+                className="editDateStart"
+                min={new Date().toISOString().split("T")[0]}
+                onChange={handleInput}
+                name="dateStart"
+                type="date"
+              />
+              {errorMsg.split(" ")[0] === '"dateStart"' ? errorMsg : ""}
 
-            <Typography>Start on:</Typography>
-            <Typography 
-            sx={{color: 'red', fontSize: '13px'}}>
-              {errorMsg.split(' ')[0] === '"dateStart"' ? errorMsg : ''}
-            </Typography>
-            <input onChange={handleInput} name='dateStart' type="date"
-            min={new Date().toISOString().split('T')[0]}
-            />
+              <Typography>End on:</Typography>
+              <input
+                min={new Date().toISOString().split("T")[0]}
+                onChange={handleInput}
+                name="dateEnd"
+                type="date"
+              />
+              {errorMsg.split(" ")[0] === '"dateEnd"' ? errorMsg : ""}
 
-            <Typography>End on:</Typography>
+              <Typography>Price:</Typography>
+              <input onChange={handleInput} name="price" type="number" />
+              {errorMsg.split(" ")[0] === '"price"' ? errorMsg : ""}
+            </div>
 
-            <Typography 
-            sx={{color: 'red', fontSize: '13px'}}>
-              {errorMsg.split(' ')[0] === '"dateEnd"' ? errorMsg : ''}
-            </Typography>
-            <input onChange={handleInput} name='dateEnd' type="date" />
+            <div className="coverImageDiv">
+              <h3 className="coverImageTitle">Cover image:</h3>
 
-            <Typography>Price:</Typography>
+              <div className="editImageDiv">
+                {previewImage ? (
+                  <img
+                    className="editImage"
+                    src={previewImage}
+                    alt={tripValue.imageName}
+                  />
+                ) : (
+                  <AddPhotoAlternateOutlinedIcon
+                    sx={{
+                      fontSize: "100px",
+                      height: "300px",
+                      display: "flex",
+                      alignItems: "center",
+                      margin: "auto",
+                    }}
+                  />
+                )}
+              </div>
 
-            <Typography 
-            sx={{color: 'red', fontSize: '13px'}}>
-              {errorMsg.split(' ')[0] === '"price"' ? errorMsg : ''}
-            </Typography>
-            <input onChange={handleInput} name='price' type="number" />
+              <div className="buttonToUploadImageOrRemove">
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/*"
+                />
 
-            <Typography>Cover image:</Typography>
-            <Typography 
-            sx={{color: 'red', fontSize: '13px'}}>
-              {errorMsg.split(' ')[0] === '"imageName"' ? errorMsg : ''}
-            </Typography>
-            <input onChange={handleFileChange} name='imageFile' type="file" /> <br/><br/>
-
-            <Button onClick={handleSubmit}>Add new trip</Button>
-            </form>
-
-
-        </Box>
+                <button
+                  type="button"
+                  className="coverImageButton"
+                  onClick={() => {
+                    if (previewImage) {
+                      handleImageRemove();
+                    } else {
+                      fileInputRef.current?.click();
+                    }
+                  }}
+                >
+                  {previewImage ? "Remove Image" : "Upload image"}
+                </button>
+                {errorMsg.split(" ")[0] === '"imageName"' ? errorMsg : ""}
+              </div>
+            </div>
+          </form>
+          <div className="editTripFinaleButton">
+            <hr className="hrEditTrip" />
+            <button className="editTripButton" onClick={handleSubmit}>
+              Add new trip
+            </button>
+          </div>
+        </div>
       </Modal>
     </>
-}
+  );
+};

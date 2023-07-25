@@ -56,3 +56,13 @@ export const updateTrip = async(updateTrip: TripType): Promise<void> => {
     },
   })
 }
+
+
+export const getTripThatNotStart = async (): Promise<EditTripType> => {
+
+  const response = await axios.get(appConfig.getAllVacationUrl)
+
+  const data = response.data as EditTripType
+  return data
+
+}

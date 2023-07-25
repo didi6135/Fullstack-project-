@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { changePassword, getUserDetails, updateDetailsService } from "../../Services/authService"
-import { NewPasswordType, RegisterType, UpdateUserDetailsType } from "../../types/RegisterType"
+import { NewPasswordType, RegisterType, UpdateUserDetailsType, UserResponse } from "../../types/RegisterType"
 
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Box, Modal, Button, TextField, Typography, IconButton } from "@mui/material";
@@ -10,6 +10,11 @@ import { Box, Modal, Button, TextField, Typography, IconButton } from "@mui/mate
 import './privateArea.css'
 import { FollowVacation } from "./followVacation/FollowVacation";
 import { getTripsThatUserFollowService } from "../../Services/followersService";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setUser } from "../../features/userSlice/UserSlice";
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import { useNavigate } from "react-router-dom";
+
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -24,32 +29,37 @@ const style = {
   
 };
 
-// interface UserDataProps {
-//   firstName: string
-//   lastName: string
-//   email: string
-// }
 
 
 export const PrivateArea = () => {
 
+  const navigate = useNavigate()
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
       setOpen(false)
       setErrorDetailsMsg('')
+      setErrorPassMsg('')
     };
-
+    const selector = useAppSelector(state => state.user.user)
+    const dispatch = useAppDispatch()
     const [details, setDetails] = useState<RegisterType>()
 
-    const [newDetails, setNewDetails] = useState<UpdateUserDetailsType>({
+    const [newDetails, setNewDetails] = useState<UserResponse>({
+      id: 0,
       firstName: '',
       lastName: '',
-      email: ''
-        })
+      email: '',
+      role: '',
+      token: ''
+    })
 
     const [currentPass, setCurrentPass] = useState('')
-    const [newPass, setNewPass] = useState<NewPasswordType>()
+
+    const [newPass, setNewPass] = useState<NewPasswordType>({
+      currentPassword: '',
+      newPassword: ''
+    })
 
     const [errorPassMsg, setErrorPassMsg] = useState('')
     const [errorDetailsMsg, setErrorDetailsMsg] = useState('')
@@ -57,59 +67,37 @@ export const PrivateArea = () => {
     const [successPass, setSuccessPass] = useState('')
     const [successDetail, setSuccessDetail] = useState('')
 
-    const token = localStorage.getItem('Token')
-    const tokenFixed = token?.replace(/["]/g, '')
+   useEffect(() => {
+    if(selector) {
+      setNewDetails(prev => ({...prev,
+        id: selector.id,
+        firstName: selector.firstName,
+        lastName: selector.lastName,
+        email: selector.email,
+        role: selector.role,
+        token: selector.token
+      }))
+    }
+
+   }, [selector])
 
 
-    const userID = localStorage.getItem('id')
-    
-    useEffect(() => {
-        const getUserData = async() => {
-          if(userID) {
-            await getUserDetails(+userID)
-            .then((detail) => {
-              setDetails(detail)
-              setNewDetails({
-                firstName: detail.firstName,
-                lastName: detail.lastName,
-                email: detail.email,
-              })
-            })
-            .catch(err => console.log(err))
-          }
-        }
-        getUserData()
-      }, [userID, open])
 
-      // useEffect(() => {
-      //   const getTripsID = async() => {  
-      //     try {
-      //       if(userID) {
-      //         const res = await getTripsThatUserFollowService(+userID);
-      //         if(res) {
-      //           setCheckUserFollow(true)
-      //         }
-      //       }
-      //     } catch (error) {
-      //       console.log(error)
-      //     }
-      //   }
-      //   getTripsID()
-      // }, [])
+      // const handleChangeCurrentPass = (event: React.ChangeEvent<HTMLInputElement>) => {
+      //     setCurrentPass(prev => ({...prev, currentPassword: event.currentTarget.value}))
+      // }
   
-      const handleChangeCurrentPass = (event: React.ChangeEvent<HTMLInputElement>) => {
-          setCurrentPass(event.currentTarget.value)
+
+      const handleChangePass = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewPass(prev => ({...prev, [event.target.name]: event.currentTarget.value}))
       }
   
-      const handleChangeNewPass = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewPass(prev => ({...prev, newPassword: event.currentTarget.value}))
-      }
-  
+
       const handleChangePassword = async () => {
-        if(details && userID) {
-          if(details.password === currentPass && newPass){
-  
-            await changePassword(+userID, newPass)
+        if(selector) {
+          console.log(newPass)
+          if(newPass.currentPassword && newPass.newPassword){
+            await changePassword(selector.id, newPass)
             .then(res => {
                 setSuccessPass(res)
                 setTimeout(() => {
@@ -118,25 +106,29 @@ export const PrivateArea = () => {
                 }, 1500);
             })
             .catch(err => setErrorPassMsg(prev => prev = err.response.data))
+          } else {
+            setErrorPassMsg('Please enter password')
           }
         }
       }
 
+
       const handleChangeDetails = (event: React.ChangeEvent<HTMLInputElement>) => {
-        
         setNewDetails(prev => ({...prev, [event.target.name]: event.target.value}))
       }
 
+
       const editDetails = async() => {
           try {
-            if(userID) {
-              await updateDetailsService(+userID, newDetails)
+            if(selector) {
+              await updateDetailsService(selector.id, newDetails)
               .then(res => {
-                setSuccessDetail(res)
-                setTimeout(() => {
-                  handleClose()
-                  setSuccessDetail('')
-                }, 1500);
+                  setSuccessDetail('Your details have been successfully changed')
+                  dispatch(setUser(res))
+                  setTimeout(() => {
+                    handleClose()
+                    setSuccessDetail('')
+                  }, 1500);
               })
               .catch(err => {
                 setErrorDetailsMsg(prev => prev = err.response.data)
@@ -146,17 +138,27 @@ export const PrivateArea = () => {
             console.log(error)
           }
       }
+
+      const handleHomePage = () => {
+        navigate('/vacationPage')
+      }
       
   return <>
-    {details ? <>
-    <div className="allDetails">
-      <IconButton onClick={handleOpen}>
-          <ModeEditOutlineOutlinedIcon />
+    {selector ? <>
+    <div className="buttonPrivateArea">
+      <IconButton onClick={handleHomePage}>
+        <ArrowBackOutlinedIcon color="primary"/>
       </IconButton>
+      <IconButton onClick={handleOpen}>
+          <ModeEditOutlineOutlinedIcon color="primary" />
+      </IconButton>
+    </div>
+    <div className="allDetails">
+
           
         <div className="fullName">
-          <h1>Hello {details.firstName} {details.lastName}</h1>
-          <h2>Email: {details.email}</h2>
+          <h1>Hello {selector.firstName} {selector.lastName}</h1>
+          <h2>Email: {selector.email}</h2>
         </div>
     </div>
     <div>
@@ -179,7 +181,7 @@ export const PrivateArea = () => {
 
               <TextField
                 name="firstName"
-                defaultValue={details.firstName}
+                defaultValue={selector.firstName}
                 onChange={handleChangeDetails}
                 sx={{ marginBottom: '20px', width: '65%' }}
                 id="outlined-basic"
@@ -192,7 +194,7 @@ export const PrivateArea = () => {
 
                 <TextField
                 name="lastName"
-                defaultValue={details.lastName}
+                defaultValue={selector.lastName}
                 onChange={handleChangeDetails}
                 sx={{ marginBottom: '20px', width: '65%' }}
                 id="outlined-basic"
@@ -205,7 +207,7 @@ export const PrivateArea = () => {
 
                 <TextField
                 name="email"
-                defaultValue={details.email}
+                defaultValue={selector.email}
                 onChange={handleChangeDetails}
                 sx={{ marginBottom: '20px', width: '65%' }}
                 id="outlined-basic"
@@ -222,14 +224,16 @@ export const PrivateArea = () => {
               </Typography>
               
               <TextField
-                onChange={handleChangeCurrentPass}
+                name="currentPassword"
+                onChange={handleChangePass}
                 sx={{ marginBottom: '20px', width: '65%' }}
                 id="outlined-basic"
                 label="Set your current password:"
                 variant="outlined" />
 
               <TextField
-                onChange={handleChangeNewPass}
+                name="newPassword"
+                onChange={handleChangePass}
                 sx={{ marginBottom: '20px', width: '65%' }}
                 id="outlined-basic"
                 label="Set a new password:"

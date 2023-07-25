@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useAppSelector } from "../../../app/hooks"
 import { getTripsThatUserFollowService } from "../../../Services/followersService"
 import { EditTripType } from "../../../types/TripType"
 import { VacationCard } from "../../VacationPage/vacationCard/VacationCard"
@@ -7,7 +8,9 @@ import './followVacation.css'
 
 export const FollowVacation = () => {
   
-    const userID = localStorage.getItem('id')
+    // const userID = localStorage.getItem('id')
+
+    const selector = useAppSelector(state => state.user.user)
 
     // const [userTripId, setUserTripId] = useState<number[]>([])
 
@@ -17,8 +20,8 @@ export const FollowVacation = () => {
 
     useEffect(() => {
       const getAll = async() => {
-        if(userID) {
-          const res = await getTripsThatUserFollowService(+userID)
+        if(selector) {
+          const res = await getTripsThatUserFollowService(selector.id)
           if(res.length === 0) {
             setCheckUserFollow(false)
           } else if(res) {
@@ -30,7 +33,7 @@ export const FollowVacation = () => {
       }
       console.log('e')
       getAll() 
-    }, [userID])
+    }, [selector?.id])
   
 
   return <>

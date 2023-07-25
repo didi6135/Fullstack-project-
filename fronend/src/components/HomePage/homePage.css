@@ -46,8 +46,8 @@
   }
 
   .navBar {
-    border-radius: 15px;
-    backdrop-filter: blur(20px);
+    /* border-radius: 15px; */
+    /* backdrop-filter: blur(20px); */
     height: 80px;
     width: 100%;
 
@@ -56,25 +56,15 @@
   .fit {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 20px;
   }
 
   .login {
     text-align: center;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
   }
 
-  .logo {
-    background-image: url('../../Assets/Images/Trip_for_you__1_-removebg-preview.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    top: 10;
-    width: 100px;
-    height: 100px;
-
-}
 
 .title {
     position: relative;

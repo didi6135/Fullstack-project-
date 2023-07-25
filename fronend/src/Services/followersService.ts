@@ -59,7 +59,6 @@ export const countFollowersPerTripService = async(tripID: number, token: string)
   })
 
   const data = response.data
-  console.log(data)
   return data
 
 } 

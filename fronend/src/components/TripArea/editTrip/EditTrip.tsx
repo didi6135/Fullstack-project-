@@ -1,4 +1,4 @@
-import { Button, Typography, TextField, Box } from "@mui/material";
+import { Typography, TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -6,6 +6,11 @@ import { getOneTrip, updateTrip } from "../../../Services/tripService";
 import { EditTripType, TripType } from "../../../types/TripType";
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 
 import './editTrip.css'
 
@@ -83,9 +88,16 @@ export const EditTrip = () => {
 
     };
 
-    const handleInput = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-      setEditTrip(prev => ({...prev, [event.target.name]: event.target.value}))
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> ) => {
+      // setEditTrip(prev => ({...prev, [event.target.name]: event.target.value}))
       // console.log(editTrip)
+      if (event instanceof Date) {
+        // If the event is a Date object, it means it came from the DatePicker
+        setEditTrip(prev => ({ ...prev, dateStart: event.toISOString() }));
+      } else if (event && 'target' in event) {
+        // Otherwise, it's a regular input or textarea event
+        setEditTrip(prev => ({ ...prev, [event.target.name]: event.target.value }));
+      }
     }
 
 
@@ -101,17 +113,11 @@ export const EditTrip = () => {
     }
 
     return <>
-      {/* <Button onClick={handleOpen}>Edit trip</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"> */}
 
         {currentTrip ? 
         <div className="editContainer">
 
-            <form action="" encType="multipart/form-data">
+            <form className="editTripForm" action="" encType="multipart/form-data">
             <div className="editTripDetails">
               <Typography>Destination:</Typography>
               <TextField 
@@ -123,10 +129,21 @@ export const EditTrip = () => {
               type={'text'}></TextField>
 
               <Typography>Description:</Typography>
-              <textarea defaultValue={currentTrip.tripDescription} onChange={handleInput} name='tripDescription' placeholder="Add Description" rows={5} cols={31}/>
+              <textarea className="descriptionEditTrip" defaultValue={currentTrip.tripDescription} onChange={handleInput} name='tripDescription' placeholder="Add Description" rows={5} cols={25}/>
 
+                  {/* <DatePicker 
+                  defaultValue={dayjs(currentTrip.dateStart.slice(0, 10))}
+                   onChange={(date) => {
+
+                   }}
+                   
+                   /> */}
+
+
+              
               <Typography>Start on:</Typography>
               <input 
+              className="editDateStart"
               defaultValue={currentTrip.dateStart.slice(0, 10)}
               onChange={handleInput} 
               name='dateStart' 
@@ -194,9 +211,10 @@ export const EditTrip = () => {
 
           </div>
             </form>
+            <div className="editTripFinaleButton">
             <hr className="hrEditTrip"/>
             <button className="editTripButton" onClick={handleSubmit}>Edit trip</button>
+            </div>
         </div> : <h1>Loading...</h1>}
-      {/* </Modal> */}
     </>
 }

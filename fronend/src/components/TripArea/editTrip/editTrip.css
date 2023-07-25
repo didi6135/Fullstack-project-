@@ -5,12 +5,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
-    width: 70%;
+    width: 50%;
     height: 70%;
     border-radius: 15px;
 }
 
-form {
+.editTripForm {
     display: grid;
     grid-template-columns: 50% 50%;
 }
@@ -23,38 +23,63 @@ form {
     padding-top: 100px;
 }
 
+.editDateStart {
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #004469;
+    cursor: pointer;
+
+}
+
+.editDateStart::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
 .coverImageDiv {
-    /* display: flex;
-    align-items: center; 
-    justify-content: center; */
+   display: grid;
+   grid-template-rows: 50px 350px;
+
 }
 
 .coverImageTitle {
+    padding-top: 20px;
     text-align: center;
+    margin: 0%;
 }
 
-/* .editImageDiv {
+.descriptionEditTrip {
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.descriptionEditTrip:focus {
+    outline: none !important;
+    border: 1px solid #02A3F7;
+}
+
+.editImageDiv {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
-    padding-bottom: 20px;
-    position: relative;
-    width: 300px;
-} */
-
-.buttonToUploadImageOrRemove {
-
+    height: 100%;
 }
+
 
 .editImage {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
-    padding-bottom: 20px;
-    height: 300px;
-    width: 300px;
+    padding: 10px;
+    height: 250px;
+    width: 250px;
     object-fit: cover;
 }
 
@@ -83,7 +108,7 @@ form {
 }
 
 .editTripButton {
-    display: flex;
+    display: flex; 
     align-items: center;
     justify-content: center;
     margin: auto;
@@ -101,6 +126,116 @@ form {
 }
 
 .editTripButton:hover {
-    transform: scale(0.95); /* Sunk effect on hover */
+    transform: scale(0.95); 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 1120px) {
+    .editContainer {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+
+    .editContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: aliceblue;
+        width: 70%;
+        height: 85%;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .editTripForm {
+        display: inline-block;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .editTripDetails {
+        display: inline-block;
+        align-items: center; 
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .editDateStart {
+
+    }
+    
+    .coverImageDiv {
+        position: relative;
+        display: grid;
+        grid-template-rows: 25px 250px;
+    }
+    
+    .coverImageTitle {
+        text-align: center;
+    }
+    
+    
+    .editImage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        padding-bottom: 20px;
+        height: 200px;
+        width: 200px;
+        object-fit: cover;
+        margin: 0%;
+    }
+    
+    .coverImageButton {
+        position: absolute;
+        top: 50%;
+        right: 25%;
+        padding: 10px 20px 10px 20px;
+        border-radius: 7px;
+        border: 2px solid #02a1f7;
+        background-color: rgba(0, 0, 0, 0.452);
+        font-size: 18px;
+        letter-spacing: 2px;
+        font-family: title;
+        color: white;
+        cursor: pointer;
+    }
+
+    .editTripButton {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        padding: 10px 20px 10px 20px;
+        border-radius: 7px;
+        border: 2px solid #02A3F7;
+        background-color: aliceblue;
+        font-size: 18px;
+        font-family: title;
+        color: #02A3F7;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .editTripButton:hover {
+        transform: scale(0.95); 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hrEditTrip {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        border: 2px solid #02A3F7;
+        border-radius: 50%;
+        margin: auto;
+        margin-bottom: 15px;
+    }
 }

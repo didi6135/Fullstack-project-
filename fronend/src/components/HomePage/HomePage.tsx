@@ -24,7 +24,7 @@ export const HomePage = () => {
     <div className="imageDiv">
         <nav className='navBar'>
             <div className="fit">
-              <div className="logo"></div>
+              
               <ModelConnect/>
             </div>
             <h1 className='title'>DISCOVER</h1>
@@ -33,12 +33,12 @@ export const HomePage = () => {
             <p className='description'>Consider you are on the plane</p>
         </nav>
 
+      {/* <div className="socialMedia">
         <hr className='lineSide'/>
-      <div className="socialMedia">
         <img className='iconHomePage' src={instagramIcon} width={'25px'} height={'25px'} alt="instagram" />
         <img className='iconHomePage' src={facebookIcon} width={'25px'} height={'25px'} alt="facebook" />
         <img className='iconHomePage' src={twitterIcon} width={'25px'} height={'25px'} alt="twitter" />
-      </div>
+      </div> */}
     </div>
 
   </section>

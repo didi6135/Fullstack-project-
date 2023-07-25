@@ -1,0 +1,38 @@
+
+
+.navBarContainer {
+  height: 80px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(20px);
+  background-color: rgba(0, 0, 0, 0.205);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  background-image: url('../../Assets/Images/Trip_for_you__1_-removebg-preview.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+
+}
+
+.navBarPrivateDetails {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  padding-right: 20px;
+  width: fit-content;
+}
+
+.firstNameAndLastName {
+  padding-right: 10px;
+  margin: 0%;
+  color: aliceblue;
+}
