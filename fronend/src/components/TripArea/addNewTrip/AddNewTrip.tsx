@@ -1,17 +1,20 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { Button, Modal, TextField, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { addNewTrip } from "../../../Services/tripService";
 import { TripType } from "../../../types/TripType";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
+import { useAppSelector } from "../../../app/hooks";
+import { toast } from "react-toastify";
 
 export const AddNewTrip = () => {
   const [open, setOpen] = useState(false);
+  const selector = useAppSelector((state) => state.user.user);
 
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => {
-    setOpen(false)
-    setTripValue({    
+    setOpen(false);
+    setTripValue({
       TripId: 0,
       destination: "",
       tripDescription: "",
@@ -19,12 +22,15 @@ export const AddNewTrip = () => {
       dateEnd: "",
       price: 0,
       imageFile: null,
-      imageName: "",})
+      imageName: "",
+    });
+    setError("");
   };
 
   const [errorMsg, setError] = useState("");
   const [previewImage, setPreviewImage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+
 
   const [tripValue, setTripValue] = useState<TripType>({
     TripId: 0,
@@ -36,7 +42,6 @@ export const AddNewTrip = () => {
     imageFile: null,
     imageName: "",
   });
-
 
   const handleInput = (
     event:
@@ -51,9 +56,14 @@ export const AddNewTrip = () => {
 
   const handleSubmit = async () => {
     try {
-      await addNewTrip(tripValue)
-        .then((res) => console.log(res))
-        .catch((err) => setError((prev) => (prev = err.response.data)));
+      if (selector) {
+        await addNewTrip(tripValue, selector.token)
+          .then((res) => {
+            toast.success("the trip upload successfully");
+            handleClose()
+          })
+          .catch((err) => setError((prev) => (prev = err.response.data)));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +71,6 @@ export const AddNewTrip = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
     if (file) {
       setTripValue((prev) => ({
         ...prev,
@@ -105,6 +114,7 @@ export const AddNewTrip = () => {
             encType="multipart/form-data"
           >
             <div className="editTripDetails">
+
               <Typography>Destination:</Typography>
               <TextField
                 variant="standard"
@@ -113,7 +123,9 @@ export const AddNewTrip = () => {
                 sx={{ width: "250px" }}
                 type={"text"}
               ></TextField>
-              {errorMsg.split(" ")[0] === '"destination"' ? errorMsg : ""}
+              <Typography sx={{ color: "red", fontSize: "13px" }}>
+                {errorMsg.split(" ")[0] === '"destination"' ? errorMsg : ""}
+              </Typography>
 
               <Typography>Description:</Typography>
               <textarea
@@ -124,7 +136,9 @@ export const AddNewTrip = () => {
                 rows={5}
                 cols={25}
               />
-              {errorMsg.split(" ")[0] === '"tripDescription"' ? errorMsg : ""}
+              <Typography sx={{ color: "red", fontSize: "13px" }}>
+                {errorMsg.split(" ")[0] === '"tripDescription"' ? errorMsg : ""}
+              </Typography>
 
               <Typography>Start on:</Typography>
               <input
@@ -134,20 +148,27 @@ export const AddNewTrip = () => {
                 name="dateStart"
                 type="date"
               />
-              {errorMsg.split(" ")[0] === '"dateStart"' ? errorMsg : ""}
+              <Typography sx={{ color: "red", fontSize: "13px" }}>
+                {errorMsg.split(" ")[0] === '"dateStart"' ? errorMsg : ""}
+              </Typography>
 
               <Typography>End on:</Typography>
               <input
-                min={new Date().toISOString().split("T")[0]}
+                min={tripValue.dateStart}
                 onChange={handleInput}
                 name="dateEnd"
                 type="date"
               />
-              {errorMsg.split(" ")[0] === '"dateEnd"' ? errorMsg : ""}
+              <Typography sx={{ color: "red", fontSize: "13px" }}>
+                {errorMsg.split(" ")[0] === '"dateEnd"' ? errorMsg : ""}
+              </Typography>
 
               <Typography>Price:</Typography>
               <input onChange={handleInput} name="price" type="number" />
-              {errorMsg.split(" ")[0] === '"price"' ? errorMsg : ""}
+
+              <Typography sx={{ color: "red", fontSize: "13px" }}>
+                {errorMsg.split(" ")[0] === '"price"' ? errorMsg : ""}
+              </Typography>
             </div>
 
             <div className="coverImageDiv">
@@ -195,7 +216,9 @@ export const AddNewTrip = () => {
                 >
                   {previewImage ? "Remove Image" : "Upload image"}
                 </button>
-                {errorMsg.split(" ")[0] === '"imageName"' ? errorMsg : ""}
+                <Typography sx={{ color: "red", fontSize: "13px" }}>
+                  {errorMsg.split(" ")[0] === '"imageName"' ? errorMsg : ""}
+                </Typography>
               </div>
             </div>
           </form>

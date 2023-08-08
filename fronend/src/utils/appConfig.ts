@@ -13,6 +13,7 @@ export const appConfig: AppConfigType = {
     getOneVacationUrl: "http://localhost:3001/api/trip",
     addNewVacationUrl: "http://localhost:3001/api/trips/addNewTrip",
     updateVacationUrl: "http://localhost:3001/api/updateTrip",
+    deleteVacationUrl: 'http://localhost:3001/api/deleteVacation',
 
     getAllFollowersForAllTrip: "http://localhost:3001/api/followers",
     countAllFollowersForAllTrip: "http://localhost:3001/api/countFollowers",

@@ -1,0 +1,16 @@
+
+
+.downloadButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    color: aliceblue;
+    background-color: cadetblue;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    padding: 10px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}

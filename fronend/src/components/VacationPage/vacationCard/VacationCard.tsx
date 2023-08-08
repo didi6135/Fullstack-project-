@@ -2,8 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { addLikeToTrip, checkingFollow, getAllFollowersService, removingFollowFromTrip } from "../../../Services/followersService"
-import { FollowersType } from "../../../types/followerType"
-import { EditTripType, TripType } from "../../../types/TripType"
+import { EditTripType } from "../../../types/TripType"
 import { MainButton } from "../../mainButton/MainButton"
 
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
@@ -11,14 +10,18 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import './vacationCard.css'
 import { useAppSelector } from "../../../app/hooks"
 import { UserResponse } from "../../../types/RegisterType"
+import { Alert, Box, Snackbar } from "@mui/material"
+import { toast, ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 interface TripProps {
-    trip: EditTripType
+    trip: EditTripType,
+    onDeleteTrip : (arg0: number) => void
 }
 
-export const VacationCard = ({trip}: TripProps) => {
+export const VacationCard = ({trip, onDeleteTrip}: TripProps) => {
     const navigate = useNavigate()
-
+    
     const [imageUrl, setImageUrl] = useState('')
 
     const [allLikes, setAllLikes] = useState(0)
@@ -26,9 +29,6 @@ export const VacationCard = ({trip}: TripProps) => {
 
 
     const selector = useAppSelector(state => state.user.user) as UserResponse
-
-
-
 
 // Get the image from node
     useEffect(() => {
@@ -43,7 +43,7 @@ export const VacationCard = ({trip}: TripProps) => {
             }
         }
         getImageUrl()
-    }, [])
+    }, [trip])
 
 // Get the trip the user is follow
     useEffect(() => {
@@ -55,21 +55,23 @@ export const VacationCard = ({trip}: TripProps) => {
             }
         }
         checkIfUserFollow()
-    }, [trip.TripId, selector?.id])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [trip.TripId, selector.id])
 
 
     
     useEffect(() => {
-        const getfollowers = async() => {
+        const getFollowers = async() => {
           if(selector) {
             await getAllFollowersService(selector.token, trip.TripId)
             .then(likes => setAllLikes(likes))
             .catch(err => console.log(err))
           }
         }
-        getfollowers()
-  
-    }, [])
+        getFollowers()
+        
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [trip.TripId])
 
 
     const handleMyLike = async () => {
@@ -83,7 +85,6 @@ export const VacationCard = ({trip}: TripProps) => {
                 })
                 .catch(err => console.log(err))
         } else if (!myLike && selector && trip.TripId) {
-            // setAddNewLike(prev => ({...prev, userId: +userID, TripId: trip.TripId}))
             await addLikeToTrip(selector.token, selector.id, trip.TripId)
             .then(res => {
                 if(res) {
@@ -96,39 +97,64 @@ export const VacationCard = ({trip}: TripProps) => {
         }
 }
 
-    
-    const handleDelete = () => {
+const [showAlert, setShowAlert] = useState(false);
+const handleDelete = async () => {
+    const shouldDelete = window.confirm('Are you sure you want to delete this trip?');
+  
+    if (shouldDelete) {
+       const deleteTrip = onDeleteTrip(trip.TripId)
+       alert('Trip deleted: ' + deleteTrip);
+    } else  {
+        setShowAlert(true)
+        setTimeout(() => {
+        setShowAlert(false)
+        }, 1500)
+        toast.info(`Trip: ${trip.TripId}, Deletion canceled.`)
 
     }
+  };
+
 
     const handleEdit = () => {        
         navigate(`/editVacation/${trip.TripId}`)
-
     }
+
     return <>
+
         <div className="tripCard"> 
             <img className="tripImage" src={imageUrl} alt="" />
         
-        {/* <div className="tripDetails"> */}
             <h2 className="tripDestination">{trip.destination}</h2>
             <p className="tripDescription">{trip.tripDescription}</p>
-            <h4 className="tripDateStart">{trip.dateStart.slice(0, 10)}</h4>
-            <h4 className="tripDAteEnd">{trip.dateEnd.slice(0, 10)}</h4>
+            <h4 className="tripDateStart">{new Date(new Date(trip.dateStart).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString()}</h4>
+            <h4 className="tripDAteEnd">{new Date(new Date(trip.dateEnd).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString()}</h4>
             <h4 className="tripPrice">$ {trip.price}</h4>
-        {/* </div> */}
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            
+        }}>
+            {selector?.role === "admin" ? 
 
-        {selector?.role === "admin" ? 
-        <><MainButton title="Edit" handleClick={handleEdit} />
-        <MainButton title="Delete" handleClick={handleDelete} /></>
-         :             
-         <button 
-         className={myLike ? 'like' : 'disLike'} 
-         
-         onClick={handleMyLike}>
-          {myLike ? <FavoriteOutlinedIcon fontSize="small"/>: <FavoriteBorderOutlinedIcon fontSize="small"/> } 
-          &nbsp; Like: {allLikes}</button>
-         }
+            <>
+            <MainButton title="Edit" handleClick={handleEdit} />
+            <MainButton title="Delete" handleClick={handleDelete} />
+            </>
+             :             
+             <button 
+             className={myLike ? 'like' : 'disLike'} 
+
+             onClick={handleMyLike}>
+              {myLike ? 
+              <FavoriteOutlinedIcon fontSize="small"/>
+              : 
+              <FavoriteBorderOutlinedIcon fontSize="small"/> } 
+
+              &nbsp; Like: {allLikes}</button>
+             }
+        </Box>
+
         </div>
     </>
-
 }

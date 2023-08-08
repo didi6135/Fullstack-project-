@@ -13,6 +13,7 @@ export type AppConfigType = {
     getOneVacationUrl: string;
     addNewVacationUrl: string;
     updateVacationUrl: string;
+    deleteVacationUrl: string;
     
     getAllFollowersForAllTrip: string;
     countAllFollowersForAllTrip: string;

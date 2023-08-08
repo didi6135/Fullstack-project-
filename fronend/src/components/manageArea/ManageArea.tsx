@@ -1,10 +1,9 @@
-import { ManageBar } from "./ManageBar"
-
+import { ManageBar } from "./ManageBar";
 
 export const ManageArea = () => {
-
-
-    return <>
-    <ManageBar/>
-    </> 
-}
+  return (
+    <>
+      <ManageBar />
+    </>
+  );
+};

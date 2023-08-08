@@ -5,6 +5,7 @@
   }
 
 .tripCard {
+    display: grid;
     border-radius: 15px;
     flex-wrap: wrap;
     width: 300px;
@@ -53,7 +54,7 @@
     border-radius: 50px;
     border: 2px solid red;
     background-color: rgba(255, 0, 0, 0.151);
-
+    cursor: pointer;
 }
 
 .disLike {
@@ -67,5 +68,7 @@
     border-radius: 50px;
     border: 2px solid rgb(126, 126, 126);
     background-color: rgb(255, 255, 255);
+    cursor: pointer;
+
 }
 

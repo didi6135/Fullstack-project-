@@ -1,12 +1,12 @@
-import { configureStore, ThunkAction, Action, combineReducers, createSerializableStateInvariantMiddleware, isPlain } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import userSilce from '../features/userSlice/UserSlice';
-import storage from 'redux-persist/lib/storage'; 
 import { persistReducer, persistStore } from 'redux-persist';
+import storageSession from 'redux-persist/lib/storage/session'
 
 
 const rootPersistConfig = {
   key: 'root',
-  storage,
+  storage: storageSession,
 }
 
 const rootReducer = combineReducers({

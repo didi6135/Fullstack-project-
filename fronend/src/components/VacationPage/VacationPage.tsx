@@ -1,8 +1,8 @@
-import { Button, IconButton, Menu, MenuItem } from "@mui/material"
+import { Box, Button, IconButton, Menu, MenuItem, Pagination, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppSelector } from "../../app/hooks"
-import { getAllVacations } from "../../Services/tripService"
+import { deleteVacationService, getAllVacations } from "../../Services/tripService"
 import { EditTripType } from "../../types/TripType"
 import { VacationCard } from "./vacationCard/VacationCard"
 
@@ -18,41 +18,35 @@ export const VacationPage = () => {
 
   const navigate = useNavigate()
 
+  const [myTrip, setMyTrip] = useState(false)
+  const [tripNotStart, setTripNotStart] = useState(false)
+  const [tripStart, setTripStart] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
     const [trips, setTrips] = useState<EditTripType[]>([])
+    const [filteredTrips, setFilteredTrips] = useState<EditTripType[]>([]);
+
+    const [filterName, setFilterName] = useState('')
     const selector = useAppSelector(state => state.user.user)
 
-    const getAllVacationForStart = () => {
-      if(selector) {
+
+    useEffect(() => {
+         if(selector) {
         getAllVacations(selector.token)
-        .then(res => setTrips(res))
+        .then(res => {
+          setTrips(res)
+          setFilteredTrips(res)
+
+        })
         .catch((err) => {
           if(err.response.data === 'Invalid token') {
             navigate('/home')
           }
         })
       }
-    }
-    useEffect(() => {
-      getAllVacationForStart()
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    // useEffect(() => {
-    //   const getUserData = async() => {
-    //     if(selector) {
-    //       await getUserDetails(selector.id)
-    //       .then(res => {
-    //         setDetails(res)
-    //       })
-    //       .catch(err => console.log(err))
-    //     }
-    //   }
-    //   getUserData()
-    // }, [])
-
-    const [myTrip, setMyTrip] = useState(false)
-    const [tripNotStart, setTripNotStart] = useState(false)
-    const [tripStart, setTripStart] = useState(false)
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const handleMyTripFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
       setMyTrip(event.target.checked)
@@ -66,49 +60,64 @@ export const VacationPage = () => {
       setTripStart(event.target.checked)
     }
 
+
     const handleFilter = async () => {
-      setAnchorEl(null)
-      if(selector) {
-        if(!myTrip && !tripNotStart && !tripStart) {
-          getAllVacations(selector.token)
-          .then(res => setTrips(res))
-          .catch(err => console.log(err))
+      setAnchorEl(null);
+      if (selector) {
+        if (!myTrip && !tripNotStart && !tripStart) {
+          setFilterName('')
+          setFilteredTrips(trips);
         }
-
-        if(myTrip) {
-          getAllVacationForStart()
-          await getTripsThatUserFollowService(selector.id)
-          .then(res => {
-            // setTrips([])
-            
-            setTrips(res)
-            })
-            .catch(err => console.log(err))
-          }
-
-          if(tripNotStart) {
-            getAllVacationForStart(   )
-             const filteredTrips = trips.filter((trip) => {
-               const tripDate = new Date(trip.dateStart).toLocaleDateString()
-               const date = new Date().toLocaleDateString()
-               
-               return date < tripDate
-             })
-
-            setTrips(filteredTrips);
-          }
-
-          if(tripStart) {
-            const filteredTrips = trips.filter((trip) => {
-              const tripDate = new Date(trip.dateStart).toLocaleDateString()
-              const date = new Date().toLocaleDateString()
-              return date > tripDate
-            })
-            setTrips(filteredTrips);
-          }
-        }
-    }
   
+        if (myTrip) {
+          await getTripsThatUserFollowService(selector.id)
+            .then((res) => {
+              setFilteredTrips(res)
+              setFilterName('Sort by: My trip')
+              // setTripNotStart(false)
+              // setTripStart(false)
+            })
+            .catch((err) => console.log(err));
+        }
+  
+        if (tripNotStart) {
+          const filteredTrips = trips.filter((trip) => {
+            const tripDate = new Date(trip.dateStart).toLocaleDateString();
+            const date = new Date().toLocaleDateString();
+            return date < tripDate;
+          });
+          // setMyTrip(false)
+          // setTripStart(false)
+          setFilterName('Sort by: Trip Not Start')
+          setFilteredTrips(filteredTrips);
+        }
+  
+        if (tripStart) {
+          const filteredTrips = trips.filter((trip) => {
+            const tripStartDate = new Date(trip.dateStart);
+            const tripEndDate = new Date(trip.dateEnd);
+            const currentDate = new Date();
+            return currentDate >= tripStartDate && currentDate <= tripEndDate;
+          });
+          // setMyTrip(false)
+          // setTripNotStart(false)
+          setFilterName('Sort by: Trip Start')
+          setFilteredTrips(filteredTrips);
+        }
+      }
+    };
+  
+
+    const handleDeleteTrip = async (tripId: number) => {
+      try {
+        await deleteVacationService(tripId);
+      
+        setTrips((prevTrips) => prevTrips.filter((trip) => trip.TripId !== tripId));
+        console.log('Trip deleted successfully.');
+      } catch (error) {
+        console.log(error)
+      }
+    };
 
 
 
@@ -120,12 +129,32 @@ export const VacationPage = () => {
       setAnchorEl(null);
     };
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5; 
+    const totalPages = Math.ceil(filteredTrips.length / itemsPerPage);
+
+    const handlePageChange = ( page: number) => {
+      setCurrentPage(page);
+    };
+
+    
+
   return <>
     {selector?.role === 'user' && 
+    
     <nav className="navTripsPage">
-      <IconButton onClick={handleMenu}>
-        <FilterListOutlinedIcon fontSize="large" color="primary"/>
-      </IconButton>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          
+          <Typography sx={{fontSize: '18px', color: 'white'}}>{filterName}</Typography>
+          
+        </Box>
+        <IconButton onClick={handleMenu}>
+          <FilterListOutlinedIcon fontSize="large" color="primary"/>
+        </IconButton>
         <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -133,7 +162,7 @@ export const VacationPage = () => {
                   vertical: 'bottom',
                   horizontal: 'left',
                 }}
-                keepMounted
+                keepMounted 
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'right',
@@ -146,15 +175,40 @@ export const VacationPage = () => {
                 <MenuItem><Checkbox onChange={handleActiveTripFilter} checked={tripStart}/>&nbsp; Active trips </MenuItem>
                 <Button onClick={handleFilter}>Filter</Button>
         </Menu>
-    </nav>}
-    {selector?.role === 'admin' &&
-    <AddNewTrip/>
+
+        
+    </nav>
     }
-    <section className="vacationConteiner">
-      {trips.map((trip, id) => (
-      <VacationCard key={id} trip={trip} />))}
-    </section>
+    {selector?.role === 'admin' &&
+    <Box sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: '20px'
+    }}>
+      <AddNewTrip/>
+    </Box>
+    }
+   <section className="vacationContainer">
+        {filteredTrips.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+          .map((trip) => (
+            <VacationCard key={trip.TripId} trip={trip} onDeleteTrip={handleDeleteTrip} />
+          ))}
+      </section>
+      <div className="pagination">
+        <Pagination
+        
+          color="primary"
+          count={totalPages}
+          page={currentPage}
+          onChange={(event, page) => handlePageChange(page)}
+        />
+      </div>
+
   </>
 }
+
+
+
 
 

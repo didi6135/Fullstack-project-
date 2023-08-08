@@ -4,7 +4,7 @@ import { appConfig } from "../utils/appConfig";
 
 
 
-export const getAllVacations = async (token: string | undefined): Promise<EditTripType[]> => {
+export const getAllVacations = async (token: string): Promise<EditTripType[]> => {
 
     const response = await axios.get(appConfig.getAllVacationUrl, {
       headers: {
@@ -35,10 +35,11 @@ export const getOneTrip = async (id: number): Promise<EditTripType> => {
 }
 
 
-export const addNewTrip = async (trip: TripType): Promise<TripType> => {
+export const addNewTrip = async (trip: TripType, token: string): Promise<TripType> => {
 
   const response = await axios.post(appConfig.addNewVacationUrl, trip, {
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       })
@@ -48,10 +49,11 @@ export const addNewTrip = async (trip: TripType): Promise<TripType> => {
 }
 
 
-export const updateTrip = async(updateTrip: TripType): Promise<void> => {
+export const updateTrip = async(updateTrip: TripType, token: string): Promise<void> => {
 
   await axios.put(appConfig.updateVacationUrl + `/${updateTrip.TripId}`, updateTrip, {
     headers: {
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     },
   })
@@ -65,4 +67,11 @@ export const getTripThatNotStart = async (): Promise<EditTripType> => {
   const data = response.data as EditTripType
   return data
 
+}
+
+export const deleteVacationService = async (id: number) => {
+  const response = await axios.delete(appConfig.deleteVacationUrl + `/${id}`)
+
+  const data = response.data
+  return data
 }

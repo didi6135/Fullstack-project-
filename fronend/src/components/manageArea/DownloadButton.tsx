@@ -1,10 +1,6 @@
 import axios from "axios";
 
-
-
-
-
-
+import './downloadButton.css'
 
 
 export const DownloadButton = () => {
@@ -26,7 +22,7 @@ export const DownloadButton = () => {
 
 
   return <>
-  <button onClick={handleDownload}>Download summery</button>
+  <button className="downloadButton" onClick={handleDownload}>Download summery</button>
   </>
 }
 
