@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { request, Request } from 'express';
+import { Request } from 'express';
 import { LoginCredentialsType, UserType } from '../4 - models/UserModel';
 
 
@@ -7,7 +7,7 @@ import { LoginCredentialsType, UserType } from '../4 - models/UserModel';
 const secretKey = 'trip-for-you'
 
 export const getNewTokenForRegister = (user: UserType): string => {
-
+    delete user.password
     const container = { user }
     
     const option = { expiresIn: '3h' }
@@ -18,7 +18,7 @@ export const getNewTokenForRegister = (user: UserType): string => {
 }
 
 export const getNewTokenForLogin = (credentials: LoginCredentialsType): string => {
-
+    delete credentials.password
     const container = { credentials }
     
     const option = { expiresIn: '3h' }
@@ -46,7 +46,6 @@ export const verifyToken = (Request: Request): Promise<boolean> => {
             // authorization header --> "Bearer the-token"
             //                           01234567
             const token = header.substring(7)
-            // console.log(token)
             if(!token) {
                 res(false)
                 return

@@ -119,7 +119,7 @@ export const validateUserRegister = (user: UserType) => {
 export const validateUserLogin = (credentials: LoginCredentialsType) => {
   const result = loginCredentialsSchema.validate(credentials)
   if(result.error) {
-      validationError(result.error.message)
+    isEmailExist('Incorrect email or password')
   }
 }
 

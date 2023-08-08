@@ -1,8 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { getAllTrips } from '../5 - logic/trip-logic';
-import { verifyLoggedIn } from '../3 - middleware/checkIsLogin';
 import { getAllFollowersLogic, addLikeToTripLogic, getTripThatUserFollow, removeFollowFromTrip, getAllTripThatUserFollow, getAllTripsTest, countFollowersPerTrip, downloadSummeryToCSV } from '../5 - logic/followers-logics';
-import { FollowersType } from '../4 - models/followersModel';
 
 const router = express.Router();
 
@@ -10,11 +7,9 @@ const router = express.Router();
 // Add new follow
 router.post('/followers/tripId/:userId([0-9]+)/:tripId([0-9]+)',  async (req: Request, res: Response, nextFunc: NextFunction) => {
     try { 
-        // const newFollower = req.body as FollowersType
+
         const userId = +req.params.userId
         const tripId = +req.params.tripId
-        // console.log(newFollower)
-        // const userId = +req.params.id
         const followers = await addLikeToTripLogic(userId, tripId)
         res.json(followers)
     } catch (error) {
@@ -86,11 +81,11 @@ router.delete('/deleteFollow/:userId([0-9]+)/:tripId([0-9]+)',  async (req: Requ
     }
 })
 
-// Download CSV summert
+// Download CSV summery
 router.get('/download-csv',  async (req: Request, res: Response, nextFunc: NextFunction) => {
 
     try {
-        const csvFile = downloadSummeryToCSV()
+        const csvFile = await downloadSummeryToCSV()
         res.send(csvFile)
     } catch (error) {
         nextFunc(error)

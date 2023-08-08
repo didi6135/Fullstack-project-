@@ -11,10 +11,10 @@ const connection = mysql.createPool({
 })
 
 // execute SQL query 
-export const executeSql = (query: string): Promise<any> => {
+export const executeSql = (query: string, value?: Array<string | number | Date>): Promise<any> => {
     return new Promise<any>((res, rej) => {
         
-        connection.query(query, (err, result) => {
+        connection.query(query, value, (err, result) => {
             if(err) {
                 rej(err)
                 return 

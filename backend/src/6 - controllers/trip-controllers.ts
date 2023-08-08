@@ -1,8 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { TripType } from '../4 - models/TripModel';
-import { addNewTrip, getAllTripIDS, getAllTrips, getOneTrip, updateTripLogic } from '../5 - logic/trip-logic';
-import multer from 'multer'
+import { EditTripType, TripType } from '../4 - models/TripModel';
+import { addNewTrip, deleteTripLogic, getAllTripIDS, getAllTrips, getOneTrip, updateTripLogic } from '../5 - logic/trip-logic';
 import { verifyLoggedIn } from '../3 - middleware/checkIsLogin';
+import multer from 'multer'
 import path from 'path';
 
 const router = express.Router();
@@ -60,14 +60,13 @@ router.get('/trip/:id([0-9]+)', async (req: Request, res: Response, nextFunc: Ne
 })
 
 // Update trip
-router.put('/updateTrip/:id([0-9]+)', async (req: Request, res: Response, nextFunc: NextFunction) => {
+router.put('/updateTrip/:id([0-9]+)', verifyLoggedIn, async (req: Request, res: Response, nextFunc: NextFunction) => {
 
     try {
         req.body.TripId = +req.params.id
         req.body.imageFile = req.files?.imageFile;
 
-        const updateTrip = req.body as TripType 
-        // console.log(updateTrip)
+        const updateTrip = req.body as EditTripType 
         const updatedTrip = await updateTripLogic(updateTrip)
         res.json(updatedTrip)
     } catch (error) {
@@ -88,6 +87,19 @@ router.get('/image/:imageName', async (req: Request, res: Response, nextFunc: Ne
         nextFunc(error)
     }
 })
+
+router.delete('/deleteVacation/:id', verifyLoggedIn , async (req: Request, res: Response, nextFunc: NextFunction) => {
+
+    try {
+        const id = +req.params.id
+
+        const deleteTrip = await deleteTripLogic(id)
+        res.json(deleteTrip)
+    } catch (error) {
+        nextFunc(error)
+    }
+})
+
 
 
 export default router;

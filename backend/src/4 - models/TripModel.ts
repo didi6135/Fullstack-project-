@@ -24,15 +24,27 @@ export type EditTripType = {
     dateStart: string,
     dateEnd: string,
     price: number,
+    imageFile: UploadedFile,
     imageName: string
 }
 
 export const TripValidationSchema = Joi.object({
     TripId: Joi.number().optional(),
     destination: Joi.string().required().min(1).max(20),
-    tripDescription: Joi.string().required().min(20).max(200),
+    tripDescription: Joi.string().required().min(20).max(2000),
     dateStart: Joi.date().iso().min(moment().format('YYYY-MM-DD')).required() ,
     dateEnd:  Joi.date().iso().min(Joi.ref('dateStart')).required(),
+    price: Joi.number().required().positive().min(1).max(10000),
+    imageFile: Joi.object().optional(),
+    imageName: Joi.string().optional(),
+})
+
+export const editTripValidationSchema = Joi.object({
+    TripId: Joi.number().optional(),
+    destination: Joi.string().required().min(1).max(20),
+    tripDescription: Joi.string().required().min(20).max(2000),
+    dateStart: Joi.date().iso().required() ,
+    dateEnd:  Joi.date().iso().greater(Joi.ref('dateStart')).optional(),
     price: Joi.number().required().positive().min(1).max(10000),
     imageFile: Joi.object().optional(),
     imageName: Joi.string().optional(),
@@ -44,7 +56,7 @@ export const validateTrip = (trip: TripType) => {
     if(result.error) tripValidateError(result.error.message)
 }
 
-// export const validateEditTrip = (trip: EditTripType) => {
-//     const result = TripValidationSchema.validate(trip)
-//     if(result.error) tripValidateError(result.error.message)
-// }
+export const validateEditTrip = (trip: EditTripType) => {
+    const result = editTripValidationSchema.validate(trip)
+    if(result.error) tripValidateError(result.error.message)
+}

@@ -1,19 +1,18 @@
 import { OkPacket } from 'mysql';
 import { executeSql } from '../2 - utils/dal'
-import { isFollowerThisTrip } from '../4 - models/ErrorModel';
-import { FollowersType } from '../4 - models/followersModel';
-import { EditTripType, TripType } from '../4 - models/TripModel';
-import { UserTripType } from '../4 - models/UserModel';
-import { getOneTrip } from './trip-logic';
+import { EditTripType } from '../4 - models/TripModel';
 import fs from 'fs'
 
 
 export const getAllFollowersLogic = async(id: number): Promise<number> => {
 
     const query = `
-    SELECT COUNT(userId) FROM followers WHERE tripId = ${id};
+    SELECT COUNT(userId) FROM followers WHERE tripId = ?;
     `
-    const allFollowers = await executeSql(query)
+
+    const queryVal = [id]
+
+    const allFollowers = await executeSql(query, queryVal)
     const followerCount = allFollowers[0]['COUNT(userId)'];
     return followerCount
 
@@ -22,9 +21,12 @@ export const getAllFollowersLogic = async(id: number): Promise<number> => {
 export const addLikeToTripLogic = async(userId: number, tripId: number): Promise<number> => {
 
     const query = `
-    INSERT INTO followers(userId, tripId) VALUES (${userId} , ${tripId});
+    INSERT INTO followers(userId, tripId) VALUES (? , ?);
     `
-    const allFollowers = await executeSql(query)
+
+    const queryVal = [userId, tripId]
+
+    const allFollowers = await executeSql(query, queryVal)
     return allFollowers
 
 }
@@ -32,32 +34,23 @@ export const addLikeToTripLogic = async(userId: number, tripId: number): Promise
 export const removeFollowFromTrip = async (userId: number, tripId: number): Promise<number> => {
 
     const query = `
-    DELETE FROM followers WHERE userId = ${userId} AND tripId = ${tripId}
+    DELETE FROM followers WHERE userId = ? AND tripId = ?
     `
+    const queryVal = [userId, tripId]
 
-    const info: OkPacket = await executeSql(query)
+    const info: OkPacket = await executeSql(query, queryVal)
     const affectedRows = info.affectedRows as number
     return affectedRows
 }
 
-
-// export const checkIfUserFollower = async (userId: number): Promise<object> => {
-
-//     const query = `
-//     SELECT COUNT(*) AS count FROM followers WHERE userId = '${userId}'
-//     `
-//     const info = await executeSql(query)
-//     return info
-// }
-
-
 export const getTripThatUserFollow = async(userId: number, tripId:number):Promise<any> => {
 
     const query = `
-    SELECT * FROM followers WHERE userId = ${userId} AND tripId = ${tripId}
+    SELECT * FROM followers WHERE userId = ? AND tripId = ?
     `
+    const queryVal = [userId, tripId]
 
-    const tripsFollow = await executeSql(query) as boolean 
+    const tripsFollow = await executeSql(query, queryVal) as boolean 
     return tripsFollow[0]
 }
 
@@ -65,11 +58,13 @@ export const getAllTripThatUserFollow = async (userId: number): Promise<number[]
 
     const query = `
     SELECT * FROM followers
-    WHERE userId = ${userId}
+    WHERE userId = ?
     `
-    const info = await executeSql(query)
+
+    const queryVal = [userId]
+
+    const info = await executeSql(query, queryVal)
     const tripIds = info.map(( {tripId} ) => tripId) as number[]
-    console.log(tripIds)
     return tripIds
 }
 
@@ -81,9 +76,10 @@ export const getAllTripsTest = async (userId: number) :Promise<EditTripType[]> =
     JOIN trip AS v ON f.tripId = v.tripId
     WHERE f.userId = ${userId};
     `
-    const info = await executeSql(query)
+    const queryVal = [userId]
+
+    const info = await executeSql(query, queryVal)
     const allTrips = info  as EditTripType[]
-    console.log(allTrips)
     return allTrips
 }
 
@@ -97,30 +93,55 @@ export const countFollowersPerTrip = async (tripID: number):Promise<any> => {
     WHERE trip.tripId = ${tripID}
     GROUP BY trip.destination;
     `
-    const numFollowers: OkPacket = await executeSql(query)
+
+    const queryVal = [tripID]
+
+    const numFollowers: OkPacket = await executeSql(query, queryVal)
     const data = numFollowers[0]
     return data
 }
 
+export const downloadSummeryToCSV = async () => {
+    try {
+      const query = `
+        SELECT trip.destination, COUNT(followers.userId) AS followerCount
+        FROM trip 
+        LEFT JOIN followers ON trip.tripId = followers.tripId 
+        WHERE trip.tripId = trip.tripId GROUP BY trip.destination;
+      `;
+  
+      const getData = await executeSql(query);
+      const csvContent = getData
+        .map((row: { destination: string; followerCount: number }) => `${row.destination},${row.followerCount}`)
+        .join('\n');
+  
+      const filePath = 'data.csv';
+  
+      fs.writeFileSync(filePath, csvContent); 
+      return csvContent
+    //   console.log('CSV file created successfully!');
+    } catch (error) {
+      console.error('Error occurred while downloading data:', error);
+    }
+  };
 
-export const downloadSummeryToCSV = async() => {
-    
-try {
-    const query = `
-    SELECT trip.destination, COUNT(followers.userId) AS followerCount
-    FROM trip 
-    LEFT JOIN followers ON trip.tripId = followers.tripId 
-    WHERE trip.tripId = trip.tripId GROUP BY trip.destination;
-    `;
-
-    const getData = await executeSql(query);
-    const csvContent = getData
-      .map((row) => `${row.destination},${row.followerCount}`)
-      .join('\n');
-    fs.writeFileSync('data.csv', csvContent);
-    console.log('CSV file created successfully!');
-  } catch (error) {
-    console.error('Error occurred while downloading data:', error);
-  }
-
-}
+// export const downloadSummeryToCSV = async () => {
+//     try {
+//       const query = `
+//       SELECT trip.destination, COUNT(followers.userId) AS followerCount
+//       FROM trip 
+//       LEFT JOIN followers ON trip.tripId = followers.tripId 
+//       WHERE trip.tripId = trip.tripId GROUP BY trip.destination;
+//       `;
+  
+//       const getData = await executeSql(query);
+//       const csvContent: Array<object> = getData
+//         .map((row: { destination: string; followerCount: number }) => `${row.destination},${row.followerCount}`)
+//         .join('\n');
+  
+//       return csvContent;
+//     } catch (error) {
+//       console.error('Error occurred while generating CSV data:', error);
+//       throw error;
+//     }
+//   };

@@ -1,6 +1,5 @@
-import express, { Request, Response, NextFunction, response } from 'express';
-import { verifyAdmin } from '../2 - utils/verifyRole';
-import { LoginCredentialsType, NewPasswordType, UserResponse, UserType } from '../4 - models/UserModel';
+import express, { Request, Response, NextFunction } from 'express';
+import { LoginCredentialsType, UserResponse, UserType } from '../4 - models/UserModel';
 import { changePassword, getUserDetails, LoginUserLogic, registerUserLogic, updateUserDetails } from '../5 - logic/auth-logic';
 
 
@@ -22,6 +21,7 @@ router.post('/auth/login', async (req: Request, res: Response, next: NextFunctio
     try {
 
         const credentials = req.body as LoginCredentialsType;
+        
         const token = await LoginUserLogic(credentials);
 
         res.status(200).json(token);
