@@ -11,7 +11,7 @@ import cors from 'cors'
 import path from "path";
 
 
-const server = express()
+const server = express() 
 
 server.use(expressFileUpload());
 server.use(express.json())

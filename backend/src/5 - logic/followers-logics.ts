@@ -102,28 +102,36 @@ export const countFollowersPerTrip = async (tripID: number):Promise<any> => {
 }
 
 export const downloadSummeryToCSV = async () => {
-    try {
-      const query = `
-        SELECT trip.destination, COUNT(followers.userId) AS followerCount
-        FROM trip 
-        LEFT JOIN followers ON trip.tripId = followers.tripId 
-        WHERE trip.tripId = trip.tripId GROUP BY trip.destination;
-      `;
-  
-      const getData = await executeSql(query);
-      const csvContent = getData
-        .map((row: { destination: string; followerCount: number }) => `${row.destination},${row.followerCount}`)
+  try {
+    const query = `
+      SELECT trip.destination, COUNT(followers.userId) AS followerCount
+      FROM trip 
+      LEFT JOIN followers ON trip.tripId = followers.tripId 
+      GROUP BY trip.destination;
+    `;
+
+    const getData = await executeSql(query);
+    const csvContent = [
+      'Destination,Follower Count', // Header line
+      ...getData.map((row: { destination: string; followerCount: number }) =>
+        `${row.destination},${row.followerCount}`),]
         .join('\n');
-  
-      const filePath = 'data.csv';
-  
-      fs.writeFileSync(filePath, csvContent); 
-      return csvContent
+
+    const filePath = 'data.csv';
+
+    fs.writeFileSync(filePath, csvContent);
+    return csvContent;
     //   console.log('CSV file created successfully!');
-    } catch (error) {
-      console.error('Error occurred while downloading data:', error);
-    }
-  };
+  } catch (error) {
+    console.error('Error occurred while downloading data:', error);
+  }
+};
+
+
+
+
+
+
 
 // export const downloadSummeryToCSV = async () => {
 //     try {
