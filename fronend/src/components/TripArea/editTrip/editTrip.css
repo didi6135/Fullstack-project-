@@ -5,9 +5,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
-    width: 50%;
+    width: 70%;
     height: 70%;
     border-radius: 15px;
+    box-sizing: border-box;
 }
 
 .editTripForm {
@@ -20,14 +21,17 @@
     align-items: center; 
     justify-content: center;
     padding-left: 50px;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 .editDateStart {
-    padding: 10px 20px 10px 20px;
-    border-radius: 5px;
-    border: 1px solid #004469;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
     cursor: pointer;
+    transition: border-color 0.3s;
 
 }
 
@@ -37,6 +41,45 @@
     cursor: pointer;
     border-radius: 3px;
 }
+
+.editDateStart:focus {
+    border-color: #007bff;
+  }
+
+.editDateEnd {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+
+}
+
+.editDateEnd::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.editDateEnd:focus {
+    border-color: #007bff;
+  }
+
+.price-input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .price-input:focus {
+    border-color: #007bff;
+  }
 
 .coverImageDiv {
    display: grid;
@@ -112,8 +155,8 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    margin-top: 50px;
-    padding: 20px 30px 20px 30px;
+    margin-top: 20px;
+    padding: 10px 20px 10px 20px;
     border-radius: 7px;
     border: 2px solid #02A3F7;
     background-color: aliceblue;

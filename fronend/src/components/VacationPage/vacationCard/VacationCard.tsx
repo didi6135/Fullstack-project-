@@ -10,8 +10,8 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import './vacationCard.css'
 import { useAppSelector } from "../../../app/hooks"
 import { UserResponse } from "../../../types/RegisterType"
-import { Alert, Box, Snackbar } from "@mui/material"
-import { toast, ToastContainer } from "react-toastify"
+import { Box } from "@mui/material"
+import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
 interface TripProps {
@@ -97,20 +97,15 @@ export const VacationCard = ({trip, onDeleteTrip}: TripProps) => {
         }
 }
 
-const [showAlert, setShowAlert] = useState(false);
 const handleDelete = async () => {
     const shouldDelete = window.confirm('Are you sure you want to delete this trip?');
   
     if (shouldDelete) {
        const deleteTrip = onDeleteTrip(trip.TripId)
-       alert('Trip deleted: ' + deleteTrip);
+       toast('Trip deleted: ' + trip.TripId);
+       
     } else  {
-        setShowAlert(true)
-        setTimeout(() => {
-        setShowAlert(false)
-        }, 1500)
         toast.info(`Trip: ${trip.TripId}, Deletion canceled.`)
-
     }
   };
 
@@ -126,8 +121,8 @@ const handleDelete = async () => {
         
             <h2 className="tripDestination">{trip.destination}</h2>
             <p className="tripDescription">{trip.tripDescription}</p>
-            <h4 className="tripDateStart">{new Date(new Date(trip.dateStart).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString()}</h4>
-            <h4 className="tripDAteEnd">{new Date(new Date(trip.dateEnd).getTime() + 24 * 60 * 60 * 1000).toLocaleDateString()}</h4>
+            <h4 className="tripDateStart">{new Date(trip.dateStart).toLocaleDateString()}</h4>
+            <h4 className="tripDAteEnd">{new Date(trip.dateEnd).toLocaleDateString()}</h4>
             <h4 className="tripPrice">$ {trip.price}</h4>
         <Box sx={{
             display: 'flex',

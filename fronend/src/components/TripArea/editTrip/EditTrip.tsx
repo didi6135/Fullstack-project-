@@ -141,7 +141,7 @@ export const EditTrip = () => {
                 onChange={handleInput}
                 name="destination"
                 sx={{ width: "250px" }}
-                type={"text"}
+                type={"text"} 
               ></TextField>
 
               <Typography>Description:</Typography>
@@ -167,6 +167,7 @@ export const EditTrip = () => {
 
               <Typography>End on:</Typography>
               <input
+                className="editDateEnd"
                 defaultValue={currentTrip.dateEnd.slice(0, 10)}
                 min={editTrip.dateStart.slice(0, 10)}
                 onChange={handleInput}
@@ -177,6 +178,8 @@ export const EditTrip = () => {
               <Typography>Price:</Typography>
               <span style={{ marginRight: "4px" }}>$</span>
               <input
+                placeholder="Enter price..."
+                className="price-input"
                 defaultValue={currentTrip.price}
                 onChange={handleInput}
                 name="price"

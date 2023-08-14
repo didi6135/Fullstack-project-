@@ -45,7 +45,7 @@ export const VacationPage = () => {
         })
       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [trips]);
 
 
     const handleMyTripFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,13 +81,12 @@ export const VacationPage = () => {
         }
   
         if (tripNotStart) {
+          const date = new Date();
           const filteredTrips = trips.filter((trip) => {
-            const tripDate = new Date(trip.dateStart).toLocaleDateString();
-            const date = new Date().toLocaleDateString();
+            const tripDate = new Date(trip.dateStart);
             return date < tripDate;
           });
-          // setMyTrip(false)
-          // setTripStart(false)
+
           setFilterName('Sort by: Trip Not Start')
           setFilteredTrips(filteredTrips);
         }
@@ -110,10 +109,13 @@ export const VacationPage = () => {
 
     const handleDeleteTrip = async (tripId: number) => {
       try {
-        await deleteVacationService(tripId);
-      
-        setTrips((prevTrips) => prevTrips.filter((trip) => trip.TripId !== tripId));
-        console.log('Trip deleted successfully.');
+        if(selector) {
+          await deleteVacationService(tripId, selector.token);
+          
+            setTrips((prevTrips) => prevTrips.filter((trip) => trip.TripId !== tripId));
+
+          // console.log('Trip deleted successfully.');
+        }
       } catch (error) {
         console.log(error)
       }

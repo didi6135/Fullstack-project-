@@ -69,8 +69,13 @@ export const getTripThatNotStart = async (): Promise<EditTripType> => {
 
 }
 
-export const deleteVacationService = async (id: number) => {
-  const response = await axios.delete(appConfig.deleteVacationUrl + `/${id}`)
+export const deleteVacationService = async (id: number, token: string) => {
+  const response = await axios.delete(appConfig.deleteVacationUrl + `/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      // 'Content-Type': 'multipart/form-data',
+    },
+  })
 
   const data = response.data
   return data

@@ -154,6 +154,7 @@ export const AddNewTrip = () => {
 
               <Typography>End on:</Typography>
               <input
+                className="editDateEnd"
                 min={tripValue.dateStart}
                 onChange={handleInput}
                 name="dateEnd"
@@ -164,7 +165,13 @@ export const AddNewTrip = () => {
               </Typography>
 
               <Typography>Price:</Typography>
-              <input onChange={handleInput} name="price" type="number" />
+              <span style={{ marginRight: "4px" }}>$</span>
+              <input 
+              placeholder="Enter price..."
+              className="price-input"
+              onChange={handleInput} 
+              name="price" 
+              type="number" />
 
               <Typography sx={{ color: "red", fontSize: "13px" }}>
                 {errorMsg.split(" ")[0] === '"price"' ? errorMsg : ""}
