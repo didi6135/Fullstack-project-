@@ -5,8 +5,10 @@ import { TripType } from "../../../types/TripType";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { useAppSelector } from "../../../app/hooks";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const AddNewTrip = () => {
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false);
   const selector = useAppSelector((state) => state.user.user);
 
@@ -55,19 +57,22 @@ export const AddNewTrip = () => {
   };
 
   const handleSubmit = async () => {
+    if (selector) {
     try {
-      if (selector) {
         await addNewTrip(tripValue, selector.token)
           .then((res) => {
             toast.success("the trip upload successfully");
             handleClose()
+            navigate('/vacationPage')
           })
           .catch((err) => setError((prev) => (prev = err.response.data)));
+        } catch (error) {
+          console.log(error);
+        }
       }
-    } catch (error) {
-      console.log(error);
-    }
   };
+
+
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -85,6 +90,8 @@ export const AddNewTrip = () => {
       reader.readAsDataURL(file);
     }
   };
+
+
 
   const handleImageRemove = () => {
     setPreviewImage("");

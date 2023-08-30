@@ -5825,3 +5825,227 @@
  ---------------------------------------------
  8/15/2023, 12:42:55 AM - ENOENT: no such file or directory, stat 'C:\Users\User\Desktop\Protfilio\trip-finelProject\backend\src\1 - Assets\images\39edcec7-75d5-4046-8417-de3b0bbf23ca.png'  
  ---------------------------------------------
+ 8/15/2023, 5:45:53 PM - connect ECONNREFUSED ::1:3306  
+ ---------------------------------------------
+ 8/15/2023, 6:33:09 PM - Router / not found  
+ ---------------------------------------------
+ 8/15/2023, 6:33:10 PM - Router /favicon.ico not found  
+ ---------------------------------------------
+ 8/15/2023, 6:33:21 PM - Router /api/auth/login not found  
+ ---------------------------------------------
+ 8/15/2023, 6:44:55 PM - Router / not found  
+ ---------------------------------------------
+ 8/15/2023, 6:45:29 PM - Router / not found  
+ ---------------------------------------------
+ 8/15/2023, 6:45:48 PM - Invalid token  
+ ---------------------------------------------
+ 8/15/2023, 6:46:44 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 6:47:55 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 6:48:06 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 6:49:44 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 7:43:01 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 7:46:33 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 8:01:36 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 8:08:38 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 8:15:13 PM - Cannot enqueue Query after fatal error.  
+ ---------------------------------------------
+ 8/15/2023, 9:35:32 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:37:09 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:40:11 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:40:15 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:46:44 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:46:45 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:54:56 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:56:33 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 9:59:19 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 10:06:13 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 10:07:43 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 10:19:59 PM - connect ECONNREFUSED 192.168.144.2:3306  
+ ---------------------------------------------
+ 8/15/2023, 10:31:06 PM - connect ECONNREFUSED 192.168.192.2:3306  
+ ---------------------------------------------
+ 8/15/2023, 10:56:30 PM - ER_ACCESS_DENIED_ERROR: Access denied for user 'Yosi'@'172.23.0.3' (using password: YES)  
+ ---------------------------------------------
+ 8/15/2023, 11:00:40 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------
+ 8/15/2023, 11:13:01 PM - connect ECONNREFUSED 172.26.0.2:3306  
+ ---------------------------------------------
+ 8/15/2023, 11:13:21 PM - ER_NO_SUCH_TABLE: Table 'trip-for-you.users' doesn't exist  
+ ---------------------------------------------
+ 8/15/2023, 11:14:32 PM - Router / not found  
+ ---------------------------------------------
+ 8/15/2023, 11:14:36 PM - Router / not found  
+ ---------------------------------------------
+ 8/15/2023, 11:14:48 PM - Invalid token  
+ ---------------------------------------------
+ 8/15/2023, 11:15:00 PM - ER_NO_SUCH_TABLE: Table 'trip-for-you.users' doesn't exist  
+ ---------------------------------------------
+ 8/15/2023, 11:17:12 PM - ER_NO_SUCH_TABLE: Table 'trip-for-you.users' doesn't exist  
+ ---------------------------------------------
+ 8/15/2023, 11:17:14 PM - ER_NO_SUCH_TABLE: Table 'trip-for-you.users' doesn't exist  
+ ---------------------------------------------
+ 8/15/2023, 11:21:20 PM - ER_NO_SUCH_TABLE: Table 'trip-for-you.users' doesn't exist  
+ ---------------------------------------------
+ 8/15/2023, 11:23:53 PM - ER_NO_SUCH_TABLE: Table 'trip-for-you.users' doesn't exist  
+ ---------------------------------------------
+ 8/15/2023, 11:25:45 PM - Router /api/auth/trips not found  
+ ---------------------------------------------
+ 8/15/2023, 11:26:06 PM - Router /api/trips not found  
+ ---------------------------------------------
+ 8/15/2023, 11:26:49 PM - Router /api/trips/76 not found  
+ ---------------------------------------------
+ 8/15/2023, 11:31:33 PM - Router / not found  
+ ---------------------------------------------
+ 8/16/2023, 6:44:39 AM - Invalid token  
+ ---------------------------------------------
+ 8/16/2023, 6:44:39 AM - Invalid token  
+ ---------------------------------------------
+ 8/16/2023, 6:44:57 AM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/3b8ccbaf-55a3-410d-97df-afad5d22d7b2.png'  
+ ---------------------------------------------
+ 8/16/2023, 6:48:38 AM - "price" must be a positive number  
+ ---------------------------------------------
+ 8/16/2023, 6:48:47 AM - "tripDescription" length must be at least 20 characters long  
+ ---------------------------------------------
+ 8/16/2023, 6:49:11 AM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/c8ca2577-39a8-4803-a8d7-cae20bec120a.png'  
+ ---------------------------------------------
+ 8/16/2023, 7:31:02 AM - "destination" is not allowed to be empty  
+ ---------------------------------------------
+ 8/16/2023, 7:31:24 AM - "price" must be a positive number  
+ ---------------------------------------------
+ 8/16/2023, 7:31:27 AM - "price" must be a positive number  
+ ---------------------------------------------
+ 8/16/2023, 7:33:14 AM - "price" must be a positive number  
+ ---------------------------------------------
+ 8/16/2023, 4:40:23 PM - Invalid token  
+ ---------------------------------------------
+ 8/16/2023, 4:40:23 PM - Invalid token  
+ ---------------------------------------------
+ 8/16/2023, 4:44:12 PM - "price" must be a number  
+ ---------------------------------------------
+ 8/16/2023, 4:48:29 PM - "price" must be a positive number  
+ ---------------------------------------------
+ 8/16/2023, 4:51:56 PM - "price" must be a positive number  
+ ---------------------------------------------
+ 8/16/2023, 4:52:48 PM - "destination" is not allowed to be empty  
+ ---------------------------------------------
+ 8/16/2023, 4:52:57 PM - "tripDescription" is not allowed to be empty  
+ ---------------------------------------------
+ 8/16/2023, 4:52:59 PM - "tripDescription" length must be at least 20 characters long  
+ ---------------------------------------------
+ 8/16/2023, 4:53:15 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 4:53:17 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 4:53:18 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 4:53:23 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 4:55:49 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 4:56:56 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 4:58:35 PM - can't find any resource with input 85  
+ ---------------------------------------------
+ 8/16/2023, 4:58:47 PM - can't find any resource with input 85  
+ ---------------------------------------------
+ 8/16/2023, 5:12:52 PM - connect ECONNREFUSED 192.168.16.2:3306  
+ ---------------------------------------------
+ 8/16/2023, 5:12:53 PM - connect ECONNREFUSED 192.168.16.2:3306  
+ ---------------------------------------------
+ 8/16/2023, 5:13:21 PM - ER_DATA_TOO_LONG: Data too long for column 'tripDescription' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 5:14:04 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 8:20:12 PM - ENOENT: no such file or directory, stat 'C:\Users\User\Desktop\Protfilio\trip-for-you\backend\src\1 - Assets\images\2b597fa4-730b-48b3-865d-932fa0fbfeeb.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 5:27:14 PM - "price" must be a positive number  
+ ---------------------------------------------
+ 8/16/2023, 5:27:33 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 5:30:52 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 5:30:56 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 5:31:42 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 5:32:33 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 5:33:29 PM - ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-08-16T00:00:00.000Z' for column 'dateStart' at row 1  
+ ---------------------------------------------
+ 8/16/2023, 5:36:08 PM - Router /api/auth/login not found  
+ ---------------------------------------------
+ 8/16/2023, 5:37:21 PM - Router /api/image/ef03ae59-55f2-4f75-94a3-e56b9207e456.jpg not found  
+ ---------------------------------------------
+ 8/16/2023, 6:59:03 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:03 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:03 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:04 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:05 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 6:59:06 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/114b89b2-a291-426b-b831-c84b5627427f.jpg'  
+ ---------------------------------------------
+ 8/16/2023, 9:44:44 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/3b936d93-c237-48c5-bc95-12daefd87e12.png'  
+ ---------------------------------------------
+ 8/16/2023, 10:21:16 PM - Router / not found  
+ ---------------------------------------------
+ 8/17/2023, 12:48:34 PM - Invalid token  
+ ---------------------------------------------
+ 8/17/2023, 12:48:34 PM - Invalid token  
+ ---------------------------------------------
+ 8/17/2023, 12:52:06 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/41e0bf92-19d5-493e-bbd6-87fbdbb08b1c.png'  
+ ---------------------------------------------
+ 8/17/2023, 12:52:06 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/41e0bf92-19d5-493e-bbd6-87fbdbb08b1c.png'  
+ ---------------------------------------------
+ 8/17/2023, 12:54:59 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/0263cb9e-1002-46d8-a3ac-9686b32a32ad.jpg'  
+ ---------------------------------------------
+ 8/17/2023, 12:54:59 PM - ENOENT: no such file or directory, stat '/app/src/1 - Assets/images/0263cb9e-1002-46d8-a3ac-9686b32a32ad.jpg'  
+ ---------------------------------------------
+ 8/17/2023, 1:35:03 PM - getaddrinfo ENOTFOUND database-service  
+ ---------------------------------------------
+ 8/17/2023, 1:35:14 PM - getaddrinfo ENOTFOUND database-service  
+ ---------------------------------------------
+ 8/17/2023, 1:46:12 PM - getaddrinfo ENOTFOUND database-service  
+ ---------------------------------------------
+ 8/17/2023, 1:46:49 PM - connect ECONNREFUSED 192.168.240.3:3306  
+ ---------------------------------------------
+ 8/17/2023, 2:07:18 PM - ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client  
+ ---------------------------------------------

@@ -1,0 +1,94 @@
+
+
+# Our entire containers
+services:
+
+  backend-service:
+    #  Our backend image
+    image: backend-image
+
+    # where is the dockerfile to create image from:
+    build: ./backend
+
+    # what is the name of the container to create:
+    container_name: backend-container
+
+    # Port binding (host:container)
+    ports:
+      - 3001:3001
+
+    # ENV variables
+    environment:
+      PORT: 3001
+      MYSQL_HOST: database-service
+      MYSQL_DATABASE: trip-for-you
+      MYSQL_USER: Yosi
+      MYSQL_PASSWORD: Wowpass
+
+    # Container restart policy
+    restart: unless-stopped
+
+    # volumes:
+    #   - ./backend:/app
+
+    depends_on:
+      - database-service
+
+    
+
+  frontend-service:
+    build:
+      context: ./fronend 
+      dockerfile: Dockerfile
+    container_name: fronend-container
+    ports:
+      - 3000:3000 
+    environment:
+      REACT_APP_API_URL: http://localhost:3001 
+    restart: unless-stopped
+
+
+
+    
+  database-service:
+    #  Our backend image
+    image: mysql:latest
+
+    # where is the dockerfile to create image from:
+    # build: ./Database
+
+    # what is the name of the container to create:
+    container_name: database-container
+
+    # Command to avoid problem of authontication
+    command: --default-authentication-plugin=mysql_native_password
+    # command: --default-authentication-plugin=caching_sha2_password
+
+    # Port binding (host:container)
+    ports:
+      - 3306:3306
+
+    # ENV variables
+    environment:
+      MYSQL_ROOT_PASSWORD: Wowpass
+      MYSQL_DATABASE: trip-for-you
+      MYSQL_USER: Yosi
+      MYSQL_PASSWORD: Wowpass
+
+    # Container restart policy
+    restart: unless-stopped
+
+    volumes:
+      # get the value of sql
+      - trip-for-you:/var/lib/mysql
+      # Create the table in mysql
+      - ./database/trip-for-you.sql:/docker-entrypoint-initdb.d/init.sql
+      - images:/backend/src/1-Assets/images
+      # - mysql-data:/var/lib/mysql
+
+    
+
+volumes:
+  trip-for-you:
+  images:
+  # mysql-data:

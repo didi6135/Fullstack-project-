@@ -8,6 +8,7 @@ import fs from 'fs/promises';
 
 // Add new trip
 export const addNewTrip = async (newTrip: TripType): Promise<TripType> => {
+    validateTrip(newTrip)
     
     if(newTrip.imageFile) {
         const getExtension = newTrip.imageFile.name.substring(newTrip.imageFile.name.lastIndexOf('.'))
@@ -16,7 +17,6 @@ export const addNewTrip = async (newTrip: TripType): Promise<TripType> => {
         delete newTrip.imageFile
         validateTrip(newTrip)
     }
-    validateTrip(newTrip)
     
     const query =  `
     INSERT INTO 
@@ -67,6 +67,7 @@ export const getAllTripIDS = async(): Promise<number[]> => {
 
 // Update trip
 export const updateTripLogic = async (updateTrip: EditTripType): Promise<EditTripType> => {
+    validateEditTrip(updateTrip)
     
     if(updateTrip.imageFile) {
         const getExtension = updateTrip.imageFile.name.substring(updateTrip.imageFile.name.lastIndexOf('.'))
@@ -75,7 +76,6 @@ export const updateTripLogic = async (updateTrip: EditTripType): Promise<EditTri
         delete updateTrip.imageFile
         validateEditTrip(updateTrip)
     }
-    validateEditTrip(updateTrip)
 
     const query = `
     UPDATE trip SET

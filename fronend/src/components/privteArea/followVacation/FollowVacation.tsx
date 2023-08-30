@@ -24,7 +24,6 @@ export const FollowVacation = () => {
         }
       }
     };
-    console.log("e");
     getAll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selector?.id]);

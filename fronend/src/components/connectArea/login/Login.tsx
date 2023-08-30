@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 import "./login.css";
 import { useAppDispatch } from "../../../app/hooks";
 import { setUser } from "../../../features/userSlice/UserSlice";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { appConfig } from "../../../utils/appConfig";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export const Login = () => {
 
   const checkLogin = async () => {
     try {
+      console.log(appConfig.loginUrl)
       await loginUser(loginInfo)
         .then((res) => {
           toast.success(`Welcome ${res.firstName} ${res.lastName}`)

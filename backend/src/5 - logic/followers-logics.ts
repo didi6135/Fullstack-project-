@@ -74,7 +74,7 @@ export const getAllTripsTest = async (userId: number) :Promise<EditTripType[]> =
     SELECT v.*
     FROM followers AS f
     JOIN trip AS v ON f.tripId = v.tripId
-    WHERE f.userId = ${userId};
+    WHERE f.userId = ?;
     `
     const queryVal = [userId]
 
@@ -126,30 +126,3 @@ export const downloadSummeryToCSV = async () => {
     console.error('Error occurred while downloading data:', error);
   }
 };
-
-
-
-
-
-
-
-// export const downloadSummeryToCSV = async () => {
-//     try {
-//       const query = `
-//       SELECT trip.destination, COUNT(followers.userId) AS followerCount
-//       FROM trip 
-//       LEFT JOIN followers ON trip.tripId = followers.tripId 
-//       WHERE trip.tripId = trip.tripId GROUP BY trip.destination;
-//       `;
-  
-//       const getData = await executeSql(query);
-//       const csvContent: Array<object> = getData
-//         .map((row: { destination: string; followerCount: number }) => `${row.destination},${row.followerCount}`)
-//         .join('\n');
-  
-//       return csvContent;
-//     } catch (error) {
-//       console.error('Error occurred while generating CSV data:', error);
-//       throw error;
-//     }
-//   };

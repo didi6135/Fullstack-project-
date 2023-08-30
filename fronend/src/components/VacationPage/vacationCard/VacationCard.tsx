@@ -19,6 +19,9 @@ interface TripProps {
     onDeleteTrip : (arg0: number) => void
 }
 
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001'
+// ${apiUrl}
+
 export const VacationCard = ({trip, onDeleteTrip}: TripProps) => {
     const navigate = useNavigate()
     
@@ -34,7 +37,7 @@ export const VacationCard = ({trip, onDeleteTrip}: TripProps) => {
     useEffect(() => {
         const getImageUrl = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/api/image/${trip.imageName}`)
+                const response = await axios.get(`${apiUrl}/api/image/${trip.imageName}`)
                 if(response.config.url) {
                     setImageUrl(response.config.url)
                 }
@@ -103,6 +106,8 @@ const handleDelete = async () => {
     if (shouldDelete) {
        const deleteTrip = onDeleteTrip(trip.TripId)
        toast('Trip deleted: ' + trip.TripId);
+       navigate('/vacationPage')
+       
        
     } else  {
         toast.info(`Trip: ${trip.TripId}, Deletion canceled.`)

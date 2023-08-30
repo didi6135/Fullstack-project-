@@ -24,6 +24,7 @@
     "chart.js": "^4.3.0",
     "daterangepicker": "^3.1.0",
     "dayjs": "^1.11.9",
+    "dotenv": "^16.3.1",
     "firebase": "^9.21.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

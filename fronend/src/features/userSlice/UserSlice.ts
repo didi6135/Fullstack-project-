@@ -10,7 +10,7 @@ const initialState: UserState = {
   user: null,
 };
 
-const userSilce = createSlice({
+const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -20,9 +20,9 @@ const userSilce = createSlice({
   },
 });
 
-export const { setUser } = userSilce.actions;
+export const { setUser } = userSlice.actions;
 
 // Other code such as selectors can use the imported RootState type
 export const selectUser = (state: RootState) => state.user.user;
 
-export default userSilce.reducer;
+export default userSlice.reducer;

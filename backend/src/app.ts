@@ -9,16 +9,25 @@ import tripControllers from './6 - controllers/trip-controllers'
 import followersControllers from './6 - controllers/followers-controllers'
 import cors from 'cors'
 import path from "path";
+import { sanitize } from "./3 - middleware/sanetize";
 
 
 const server = express() 
 
 server.use(expressFileUpload());
 server.use(express.json())
-server.use(cors())
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionSuccessStatus: 200,
+    credentials: true, 
+}
+server.use(cors(corsOptions))
 
 const imageFolderPath = path.join(__dirname, '1 - Assets', 'images')
 server.use(express.static(imageFolderPath)); 
+
+server.use(sanitize)
 
 server.use("/api", tripControllers)
 server.use("/api", authControllers)

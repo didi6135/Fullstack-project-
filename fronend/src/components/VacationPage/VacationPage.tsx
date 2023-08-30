@@ -31,12 +31,11 @@ export const VacationPage = () => {
 
 
     useEffect(() => {
-         if(selector) {
+         if(selector && trips.length === 0) {
         getAllVacations(selector.token)
         .then(res => {
           setTrips(res)
           setFilteredTrips(res)
-
         })
         .catch((err) => {
           if(err.response.data === 'Invalid token') {
@@ -74,11 +73,10 @@ export const VacationPage = () => {
             .then((res) => {
               setFilteredTrips(res)
               setFilterName('Sort by: My trip')
-              // setTripNotStart(false)
-              // setTripStart(false)
+              console.log(filteredTrips)
             })
             .catch((err) => console.log(err));
-        }
+          }
   
         if (tripNotStart) {
           const date = new Date();
@@ -98,14 +96,12 @@ export const VacationPage = () => {
             const currentDate = new Date();
             return currentDate >= tripStartDate && currentDate <= tripEndDate;
           });
-          // setMyTrip(false)
-          // setTripNotStart(false)
+
           setFilterName('Sort by: Trip Start')
           setFilteredTrips(filteredTrips);
         }
       }
     };
-  
 
     const handleDeleteTrip = async (tripId: number) => {
       try {

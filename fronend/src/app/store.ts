@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
-import userSilce from '../features/userSlice/UserSlice';
+import userSlice from '../features/userSlice/UserSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session'
 
@@ -10,8 +10,8 @@ const rootPersistConfig = {
 }
 
 const rootReducer = combineReducers({
-  user: userSilce,
-  
+  user: userSlice,
+   
 })
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer)

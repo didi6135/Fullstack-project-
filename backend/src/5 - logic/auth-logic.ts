@@ -23,7 +23,7 @@ export const checkIsEmailExist = async (email: string): Promise<object> => {
 
 export const getIdByEmail = async(email:string): Promise<number> => {
     
-    const query = `
+    const query = ` 
     SELECT id FROM users WHERE email = ?
     `
     const queryVal = [email]

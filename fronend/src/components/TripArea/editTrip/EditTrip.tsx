@@ -102,6 +102,9 @@ export const EditTrip = () => {
   const handleSubmit = async () => {
     try {
       if (selector) {
+        editTrip.dateStart = new Date(editTrip.dateStart).toISOString().slice(0, 19).replace('T', ' ');
+        editTrip.dateEnd = new Date(editTrip.dateEnd).toISOString().slice(0, 19).replace('T', ' ');
+  
         await updateTrip(editTrip, selector.token)
           .then((res) => {
             toast.success(`trip: ${editTrip.TripId}, updated successfully`)
@@ -155,11 +158,11 @@ export const EditTrip = () => {
                 cols={25}
               />
 
-              <Typography>Start on:</Typography>
+              <Typography>Start on:</Typography> 
               <input
                 className="editDateStart"
                 min={editTrip.dateStart.slice(0, 10)}
-                defaultValue={currentTrip.dateStart.slice(0, 10)}
+                defaultValue={new Date(currentTrip.dateStart).toISOString().slice(0, 19).replace('T', ' ')}
                 onChange={handleInput}
                 name="dateStart"
                 type="date"
@@ -168,7 +171,7 @@ export const EditTrip = () => {
               <Typography>End on:</Typography>
               <input
                 className="editDateEnd"
-                defaultValue={currentTrip.dateEnd.slice(0, 10)}
+                defaultValue={new Date(currentTrip.dateEnd).toISOString().slice(0, 19).replace('T', ' ')}
                 min={editTrip.dateStart.slice(0, 10)}
                 onChange={handleInput}
                 name="dateEnd"
